@@ -1,0 +1,281 @@
+name: release
+
+# Builds a release .apk and .ipa and publishes them on a GitHub Release.
+#
+#   git tag v0.1.0 && git push origin v0.1.0     -> builds + GitHub Release "v0.1.0"
+#   Actions -> release -> Run workflow, tag "v0.1.0" -> same; GitHub creates the tag
+#   Actions -> release -> Run workflow, tag empty -> builds, artifacts only (no Release)
+#
+# Signing is optional. Without the secrets below the workflow still produces files,
+# clearly named as unsigned/debug-signed (fine for testing, not for the stores).
+#
+# Android secrets: ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS,
+#                  ANDROID_KEY_PASSWORD
+# iOS secrets:     IOS_CERTIFICATE_P12_BASE64 (Apple Distribution cert), IOS_CERTIFICATE_PASSWORD,
+#                  IOS_PROVISIONING_PROFILE_BASE64 (ad-hoc or App Store profile)
+# Repository variables (optional):
+#   API_BASE_URL            İzmir Go API the release app talks to (default: config/prod.json)
+#   ANDROID_APPLICATION_ID  replaces the com.example placeholder
+#   IOS_EXPORT_METHOD       release-testing (ad-hoc, default) | app-store-connect | enterprise
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to create, e.g. v0.1.0 or v0.2.0-beta.1 (empty = build only)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  FLUTTER_VERSION: "3.47.8"
+  # Tag of the release being built: the pushed tag, or the manual-run input.
+  RELEASE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || inputs.tag }}
+
+jobs:
+  version:
+    runs-on: ubuntu-24.04
+    outputs:
+      name: ${{ steps.v.outputs.name }}
+      number: ${{ steps.v.outputs.number }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: v
+        run: |
+          if [[ -n "${RELEASE_TAG}" ]]; then
+            if ! [[ "${RELEASE_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$ ]]; then
+              echo "::error::Tag '${RELEASE_TAG}' must look like v1.2.3 or v1.2.3-beta.1"; exit 1
+            fi
+            name="${RELEASE_TAG#v}"
+            name="${name%%-*}"   # v0.2.0-beta.1 -> store version 0.2.0 (Release is marked pre-release)
+          else
+            name="$(grep -E '^version:' apps/mobile/pubspec.yaml | sed -E 's/version: *([^+]+).*/\1/')"
+          fi
+          if ! [[ "$name" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Version '$name' must look like 1.2.3 (tag v1.2.3)"; exit 1
+          fi
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "number=${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+          echo "Building $name ($GITHUB_RUN_NUMBER)"
+
+  android:
+    needs: version
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Release config
+        env:
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
+        run: |
+          jq --arg url "${API_BASE_URL:-}" 'if $url != "" then .API_BASE_URL = $url else . end' \
+            config/prod.json > config/release.json
+          cat config/release.json
+      - name: Signing key
+        id: key
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [[ -n "$KEYSTORE_B64" ]]; then
+            echo "$KEYSTORE_B64" | base64 --decode > android/app/release.jks
+            printf 'storeFile=release.jks\nstorePassword=%s\nkeyAlias=%s\nkeyPassword=%s\n' \
+              "$STORE_PASSWORD" "$KEY_ALIAS" "$KEY_PASSWORD" > android/key.properties
+            echo "suffix=" >> "$GITHUB_OUTPUT"
+            echo "signed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::No Android signing secrets: the APK is debug-signed (testing only)."
+            echo "suffix=-debugsigned" >> "$GITHUB_OUTPUT"
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - run: flutter pub get
+      - run: dart run build_runner build --delete-conflicting-outputs
+      - name: Build APK
+        env:
+          APP_ID: ${{ vars.ANDROID_APPLICATION_ID }}
+        run: |
+          args=()
+          if [[ -n "$APP_ID" ]]; then args+=(--android-project-arg="izmirgo.applicationId=$APP_ID"); fi
+          flutter build apk --release \
+            --build-name=${{ needs.version.outputs.name }} \
+            --build-number=${{ needs.version.outputs.number }} \
+            --dart-define-from-file=config/release.json "${args[@]}"
+          if [[ "${{ steps.key.outputs.signed }}" == "true" ]]; then
+            flutter build appbundle --release \
+              --build-name=${{ needs.version.outputs.name }} \
+              --build-number=${{ needs.version.outputs.number }} \
+              --dart-define-from-file=config/release.json "${args[@]}"
+          fi
+      - name: Collect
+        run: |
+          mkdir -p dist
+          cp build/app/outputs/flutter-apk/app-release.apk \
+            "dist/izmir-go-${{ needs.version.outputs.name }}${{ steps.key.outputs.suffix }}.apk"
+          if [[ -f build/app/outputs/bundle/release/app-release.aab ]]; then
+            cp build/app/outputs/bundle/release/app-release.aab "dist/izmir-go-${{ needs.version.outputs.name }}.aab"
+          fi
+          rm -f android/key.properties android/app/release.jks
+          ls -lh dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android
+          path: apps/mobile/dist/*
+          if-no-files-found: error
+
+  ios:
+    needs: version
+    runs-on: macos-15
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: Release config
+        env:
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
+        run: |
+          jq --arg url "${API_BASE_URL:-}" 'if $url != "" then .API_BASE_URL = $url else . end' \
+            config/prod.json > config/release.json
+      - name: Signing (certificate + provisioning profile)
+        id: sign
+        env:
+          P12_B64: ${{ secrets.IOS_CERTIFICATE_P12_BASE64 }}
+          P12_PASSWORD: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+          PROFILE_B64: ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
+          EXPORT_METHOD: ${{ vars.IOS_EXPORT_METHOD }}
+        run: |
+          if [[ -z "$P12_B64" || -z "$PROFILE_B64" ]]; then
+            echo "::warning::No iOS signing secrets: building an UNSIGNED .ipa (must be re-signed to install)."
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          KEYCHAIN="$RUNNER_TEMP/build.keychain-db"
+          KEYCHAIN_PASSWORD="$(openssl rand -hex 16)"
+          echo "$P12_B64" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          echo "$PROFILE_B64" | base64 --decode > "$RUNNER_TEMP/profile.mobileprovision"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security import "$RUNNER_TEMP/cert.p12" -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN"
+          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN" >/dev/null
+          # Keep the existing keychains in the search list (one path per word).
+          # shellcheck disable=SC2046
+          security list-keychain -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
+
+          security cms -D -i "$RUNNER_TEMP/profile.mobileprovision" > "$RUNNER_TEMP/profile.plist"
+          UUID=$(/usr/libexec/PlistBuddy -c 'Print :UUID' "$RUNNER_TEMP/profile.plist")
+          NAME=$(/usr/libexec/PlistBuddy -c 'Print :Name' "$RUNNER_TEMP/profile.plist")
+          TEAM=$(/usr/libexec/PlistBuddy -c 'Print :TeamIdentifier:0' "$RUNNER_TEMP/profile.plist")
+          APP_ID=$(/usr/libexec/PlistBuddy -c 'Print :Entitlements:application-identifier' "$RUNNER_TEMP/profile.plist")
+          BUNDLE_ID="${APP_ID#"${TEAM}".}"
+          mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
+          cp "$RUNNER_TEMP/profile.mobileprovision" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
+
+          python3 tool/ios_manual_signing.py "$BUNDLE_ID" "$TEAM" "$NAME" \
+            "${EXPORT_METHOD:-release-testing}" "$RUNNER_TEMP/ExportOptions.plist"
+          {
+            echo "export_options=$RUNNER_TEMP/ExportOptions.plist"
+            echo "keychain=$KEYCHAIN"
+            echo "signed=true"
+          } >> "$GITHUB_OUTPUT"
+      - run: flutter pub get
+      - run: dart run build_runner build --delete-conflicting-outputs
+      - name: Build signed IPA
+        if: steps.sign.outputs.signed == 'true'
+        run: |
+          flutter build ipa --release \
+            --build-name=${{ needs.version.outputs.name }} \
+            --build-number=${{ needs.version.outputs.number }} \
+            --dart-define-from-file=config/release.json \
+            --export-options-plist="${{ steps.sign.outputs.export_options }}"
+          mkdir -p dist
+          cp build/ios/ipa/*.ipa "dist/izmir-go-${{ needs.version.outputs.name }}.ipa"
+      - name: Build unsigned IPA
+        if: steps.sign.outputs.signed != 'true'
+        run: |
+          flutter build ios --release --no-codesign \
+            --build-name=${{ needs.version.outputs.name }} \
+            --build-number=${{ needs.version.outputs.number }} \
+            --dart-define-from-file=config/release.json
+          mkdir -p dist build/ipa/Payload
+          cp -R build/ios/iphoneos/Runner.app build/ipa/Payload/
+          (cd build/ipa && zip -qry "../../dist/izmir-go-${{ needs.version.outputs.name }}-unsigned.ipa" Payload)
+      - name: Clean up keychain
+        if: always() && steps.sign.outputs.keychain != ''
+        run: security delete-keychain "${{ steps.sign.outputs.keychain }}" || true
+      - run: ls -lh dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios
+          path: apps/mobile/dist/*
+          if-no-files-found: error
+
+  publish:
+    needs: [version, android, ios]
+    if: github.ref_type == 'tag' || inputs.tag != ''
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Checksums and notes
+        run: |
+          (cd dist && sha256sum -- * > SHA256SUMS.txt)
+          {
+            echo "İzmir Go ${RELEASE_TAG} (version ${{ needs.version.outputs.name }}, build ${{ needs.version.outputs.number }})"
+            echo
+            echo "| File | Notes |"
+            echo "|---|---|"
+            for f in dist/*; do
+              n=$(basename "$f")
+              case "$n" in
+                *-debugsigned.apk) note="Debug-signed: install for testing only; not for Google Play." ;;
+                *.apk) note="Release-signed Android package." ;;
+                *.aab) note="Android App Bundle for Google Play upload." ;;
+                *-unsigned.ipa) note="Unsigned: must be re-signed before it can be installed on an iPhone." ;;
+                *.ipa) note="Signed iOS package (export method: ${{ vars.IOS_EXPORT_METHOD || 'release-testing' }})." ;;
+                *) note="" ;;
+              esac
+              echo "| \`$n\` | $note |"
+            done
+            echo
+            echo "Transit data: İzmir Büyükşehir Belediyesi Açık Veri Portalı (CC BY 4.0). Map data © OpenStreetMap contributors."
+          } > notes.md
+          cat notes.md
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          target_commitish: ${{ github.sha }}
+          name: İzmir Go ${{ env.RELEASE_TAG }}
+          body_path: notes.md
+          files: dist/*
+          prerelease: ${{ contains(env.RELEASE_TAG, '-') }}
