@@ -200,6 +200,117 @@ def stop_directory() -> None:
     typer.echo(f"stop-directory: {count} ESHOT stops")
 
 
+@app.command("build-bundle")
+def build_bundle_cmd(
+    out: Annotated[Path, typer.Option(help="Output directory (edge/public/data)")],
+    require: Annotated[
+        list[str] | None, typer.Option(help="Fail unless these sources are usable")
+    ] = None,
+    fixtures: Annotated[bool, typer.Option(help="Use the SYNTHETIC fixture feeds")] = False,
+) -> None:
+    """Build the static bundle for the Cloudflare Worker (no database needed)."""
+    import hashlib
+
+    from izmirgo.edge.bundle import BundleInput, Coverage, build_bundle
+    from izmirgo.ingestion.fetch import FetchError
+    from izmirgo.ingestion.gtfs import GtfsFeed
+    from izmirgo.ingestion.merge import SourceInput, merge_feeds
+    from izmirgo.ingestion.validate import validate_feed
+
+    settings = get_settings()
+    configure_logging(settings.log_level, settings.log_format)
+    registry = load_registry(settings.sources_file)
+    work = settings.data_dir / "edge"
+    if fixtures:
+        selected = fixture_sources()
+        acquire = fixture_acquirer(work / "raw-fixtures")
+        interchanges = load_interchanges(FIXTURE_DIR / "data" / "interchanges.csv")
+        stations = load_stations(FIXTURE_DIR / "data" / "stations.csv")
+        today = date(2026, 10, 28)
+    else:
+        selected = list(registry.gtfs)
+        raw_dir = work / "raw"
+
+        def acquire(s: GtfsSource) -> FetchResult:
+            return fetch_source(s, raw_dir, user_agent=settings.user_agent)
+
+        interchanges = load_interchanges(REPO_ROOT / "data" / "interchanges.csv")
+        stations = load_stations(REPO_ROOT / "data" / "stations.csv")
+        today = _today()
+
+    coverage: list[Coverage] = []
+    inputs: list[SourceInput] = []
+    for s in selected:
+        cov = Coverage(s.id, s.operator, s.mode, False, "", times_approximate=s.times_approximate)
+        try:
+            fetched = acquire(s)
+        except FetchError as exc:
+            cov.reason = f"fetch failed: {exc}"[:300]
+            coverage.append(cov)
+            continue
+        with GtfsFeed(fetched.path) as feed:
+            report = validate_feed(feed, today=today, bbox=settings.coverage_bbox)
+        cov.fetched_at = fetched.fetched_at
+        cov.valid_from, cov.valid_to = report.feed_start, report.feed_end
+        cov.calendar_dates = report.stats.get("calendar_dates", 0)
+        if report.usable and report.feed_start and report.feed_end:
+            cov.included = True
+            cov.reason = "mirror copy" if fetched.is_mirror else "producer feed"
+            inputs.append(
+                SourceInput(
+                    s,
+                    fetched.path,
+                    report.feed_start,
+                    report.feed_end,
+                    frozenset(report.drop_trip_ids),
+                )
+            )
+        else:
+            cov.reason = f"current feed {report.validity}"
+        coverage.append(cov)
+        typer.echo(f"{s.id:8} {'INCLUDED' if cov.included else 'excluded':9} {cov.reason}")
+
+    missing = [r for r in (require or []) if r not in {i.source.id for i in inputs}]
+    if missing or not inputs:
+        typer.echo(f"required sources unavailable: {missing or 'all'}; not building", err=True)
+        raise typer.Exit(1)
+
+    merged = work / "merged.zip"
+    merge_feeds(inputs, merged, version_label="edge", interchanges=interchanges, stations=stations)
+    label = (
+        f"{datetime.now(UTC):%Y%m%dT%H%MZ}-{hashlib.sha256(merged.read_bytes()).hexdigest()[:8]}"
+    )
+
+    def optional_csv(key: str) -> str | None:
+        if fixtures:
+            return None
+        url = registry.static_csv.get(key, {}).get("url")
+        if not url:
+            return None
+        for _ in range(3):
+            try:
+                res = httpx.get(url, timeout=60, follow_redirects=True)
+                res.raise_for_status()
+                return res.content.decode("utf-8", errors="replace")
+            except httpx.HTTPError as exc:
+                typer.echo(f"{key}: {exc}", err=True)
+        return None
+
+    stats = build_bundle(
+        BundleInput(
+            merged_path=merged,
+            label=label,
+            coverage=coverage,
+            sources={s.id: s for s in selected},
+            directory_csv=optional_csv("eshot_stops"),
+            announcements_csv=optional_csv("eshot_announcements"),
+            attribution=registry.attribution,
+        ),
+        out,
+    )
+    typer.echo(f"bundle {label}: {stats}")
+
+
 @app.command()
 def rollback() -> None:
     """Re-activate the previous dataset version."""
