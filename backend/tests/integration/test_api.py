@@ -269,3 +269,48 @@ def test_directory_stops_fill_in_when_bus_timetable_is_excluded(
     )
     snapshot = client.get("/api/v1/catalog/snapshot").json()
     assert any(s["id"] == "eshot:50011" and not s["has_schedule"] for s in snapshot["stops"])
+
+
+def test_journeys_maps_recorded_otp_response(client: TestClient, engine: Engine) -> None:
+    import json
+
+    from sqlalchemy import text
+
+    with engine.begin() as conn:
+        conn.execute(text("UPDATE dataset_version SET otp_url = 'http://otp.test.invalid'"))
+    recorded = json.loads((FIXTURES / "otp" / "plan_metro_tram.json").read_text())
+    with respx.mock() as mock:
+        route = mock.post("http://otp.test.invalid/otp/gtfs/v1").mock(
+            return_value=httpx.Response(200, json=recorded)
+        )
+        body = client.get(
+            "/api/v1/journeys",
+            params={"from": "metro:FXM1", "to": "tram:FXT3", "at": "2026-10-28T08:00:00+03:00"},
+        ).json()
+    sent = json.loads(route.calls.last.request.content)
+    assert (
+        sent["variables"]["origin"]["location"]["stopLocation"]["stopLocationId"]
+        == "izm:metro:FXM1"
+    )
+    j = body["items"][0]
+    assert j["basis"] == "scheduled"
+    assert j["modes"] == ["metro", "walk", "tram"]
+    metro, walk, tram = j["legs"]
+    assert metro["route"]["short_name"] == "FM1"
+    assert metro["route"]["color"] == "0038EF"
+    assert metro["geometry_basis"] == "stop_to_stop"
+    assert tram["geometry_basis"] == "shape"
+    assert walk["is_transfer"] is True
+    assert walk["transfer_source"] == "curated"
+    assert body["routing_errors"] == []
+
+
+def test_journeys_validation_and_unavailable(client: TestClient) -> None:
+    bad = client.get("/api/v1/journeys", params={"from": "nowhere", "to": "tram:FXT3"})
+    assert bad.status_code == 422
+    outside = client.get("/api/v1/journeys", params={"from": "41.0,29.0", "to": "tram:FXT3"})
+    assert outside.json()["code"] == "OUTSIDE_COVERAGE_AREA"
+    # The fixture dataset has no OTP URL and the test settings set none: routing is unavailable.
+    res = client.get("/api/v1/journeys", params={"from": "metro:FXM1", "to": "tram:FXT3"})
+    assert res.status_code == 503
+    assert res.json()["code"] == "ROUTING_UNAVAILABLE"

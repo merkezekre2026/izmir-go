@@ -19,6 +19,8 @@ class Settings(BaseSettings):
     izmir_openapi_url: str = "https://openapi.izmir.bel.tr/api"
     photon_url: str = "https://photon.komoot.io"
     data_dir: Path = Path("./var")
+    # Clipped İzmir OSM extract for OTP walking (scripts/fetch-osm.sh). Optional.
+    osm_path: Path | None = None
     sources_file: Path = Path(__file__).resolve().parents[4] / "data" / "sources.yaml"
     log_format: Literal["json", "console"] = "console"
     log_level: str = "INFO"

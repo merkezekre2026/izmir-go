@@ -562,6 +562,348 @@
         "title": "Health",
         "type": "object"
       },
+      "IntermediateStop": {
+        "properties": {
+          "lat": {
+            "title": "Lat",
+            "type": "number"
+          },
+          "lon": {
+            "title": "Lon",
+            "type": "number"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "scheduled_departure": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheduled Departure"
+          },
+          "stop_id": {
+            "title": "Stop Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stop_id",
+          "name",
+          "lat",
+          "lon",
+          "scheduled_departure"
+        ],
+        "title": "IntermediateStop",
+        "type": "object"
+      },
+      "Journey": {
+        "properties": {
+          "basis": {
+            "const": "scheduled",
+            "default": "scheduled",
+            "description": "İzmir publishes no GTFS-Realtime; journeys are timetable-based",
+            "title": "Basis",
+            "type": "string"
+          },
+          "duration_s": {
+            "title": "Duration S",
+            "type": "integer"
+          },
+          "end": {
+            "format": "date-time",
+            "title": "End",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "legs": {
+            "items": {
+              "$ref": "#/components/schemas/JourneyLeg"
+            },
+            "title": "Legs",
+            "type": "array"
+          },
+          "modes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Modes",
+            "type": "array"
+          },
+          "start": {
+            "format": "date-time",
+            "title": "Start",
+            "type": "string"
+          },
+          "transfers": {
+            "title": "Transfers",
+            "type": "integer"
+          },
+          "walk_distance_m": {
+            "title": "Walk Distance M",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "start",
+          "end",
+          "duration_s",
+          "transfers",
+          "walk_distance_m",
+          "modes",
+          "legs"
+        ],
+        "title": "Journey",
+        "type": "object"
+      },
+      "JourneyLeg": {
+        "properties": {
+          "basis": {
+            "const": "scheduled",
+            "default": "scheduled",
+            "title": "Basis",
+            "type": "string"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/JourneyPlace"
+          },
+          "distance_m": {
+            "title": "Distance M",
+            "type": "integer"
+          },
+          "duration_s": {
+            "title": "Duration S",
+            "type": "integer"
+          },
+          "end": {
+            "format": "date-time",
+            "title": "End",
+            "type": "string"
+          },
+          "geometry": {
+            "description": "[lon, lat] pairs",
+            "items": {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            "title": "Geometry",
+            "type": "array"
+          },
+          "geometry_basis": {
+            "enum": [
+              "shape",
+              "stop_to_stop",
+              "street_network",
+              "straight_line"
+            ],
+            "title": "Geometry Basis",
+            "type": "string"
+          },
+          "headsign": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Headsign"
+          },
+          "intermediate_stops": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/IntermediateStop"
+            },
+            "title": "Intermediate Stops",
+            "type": "array"
+          },
+          "is_transfer": {
+            "default": false,
+            "title": "Is Transfer",
+            "type": "boolean"
+          },
+          "mode": {
+            "enum": [
+              "walk",
+              "bus",
+              "metro",
+              "tram",
+              "rail",
+              "ferry",
+              "other"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/JourneyPlace"
+          },
+          "route": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RouteSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "service_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Service Date"
+          },
+          "start": {
+            "format": "date-time",
+            "title": "Start",
+            "type": "string"
+          },
+          "times_approximate": {
+            "default": false,
+            "title": "Times Approximate",
+            "type": "boolean"
+          },
+          "transfer_source": {
+            "anyOf": [
+              {
+                "enum": [
+                  "curated",
+                  "street_network"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transfer Source"
+          },
+          "trip_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trip Id"
+          }
+        },
+        "required": [
+          "mode",
+          "start",
+          "end",
+          "duration_s",
+          "distance_m",
+          "origin",
+          "destination",
+          "geometry",
+          "geometry_basis"
+        ],
+        "title": "JourneyLeg",
+        "type": "object"
+      },
+      "JourneyPlace": {
+        "properties": {
+          "lat": {
+            "title": "Lat",
+            "type": "number"
+          },
+          "lon": {
+            "title": "Lon",
+            "type": "number"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "station_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Station Id"
+          },
+          "stop_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stop Id"
+          }
+        },
+        "required": [
+          "name",
+          "lat",
+          "lon"
+        ],
+        "title": "JourneyPlace",
+        "type": "object"
+      },
+      "JourneysResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Journey"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "routing_errors": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/RoutingProblem"
+            },
+            "title": "Routing Errors",
+            "type": "array"
+          }
+        },
+        "required": [
+          "items",
+          "meta"
+        ],
+        "title": "JourneysResponse",
+        "type": "object"
+      },
       "LiveResponse": {
         "properties": {
           "basis": {
@@ -1265,6 +1607,24 @@
           "times_approximate"
         ],
         "title": "RouteSummary",
+        "type": "object"
+      },
+      "RoutingProblem": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "RoutingProblem",
         "type": "object"
       },
       "ScheduleResponse": {
@@ -2036,6 +2396,167 @@
         "summary": "Readiness: database, dataset, routing",
         "tags": [
           "status"
+        ]
+      }
+    },
+    "/api/v1/journeys": {
+      "get": {
+        "operationId": "journeys_api_v1_journeys_get",
+        "parameters": [
+          {
+            "description": "'lat,lon' or a stop id",
+            "in": "query",
+            "name": "from",
+            "required": true,
+            "schema": {
+              "description": "'lat,lon' or a stop id",
+              "title": "From",
+              "type": "string"
+            }
+          },
+          {
+            "description": "'lat,lon' or a stop id",
+            "in": "query",
+            "name": "to",
+            "required": true,
+            "schema": {
+              "description": "'lat,lon' or a stop id",
+              "title": "To",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ISO 8601; defaults to now",
+            "in": "query",
+            "name": "at",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "ISO 8601; defaults to now",
+              "title": "At"
+            }
+          },
+          {
+            "in": "query",
+            "name": "time_type",
+            "required": false,
+            "schema": {
+              "default": "depart",
+              "enum": [
+                "depart",
+                "arrive"
+              ],
+              "title": "Time Type",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Comma separated transit modes",
+            "in": "query",
+            "name": "modes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Comma separated transit modes",
+              "title": "Modes"
+            }
+          },
+          {
+            "in": "query",
+            "name": "max_transfers",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maximum": 4,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Max Transfers"
+            }
+          },
+          {
+            "in": "query",
+            "name": "walk_speed",
+            "required": false,
+            "schema": {
+              "default": "normal",
+              "enum": [
+                "slow",
+                "normal",
+                "fast"
+              ],
+              "title": "Walk Speed",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "wheelchair",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Wheelchair",
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 3,
+              "maximum": 5,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JourneysResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Plan journeys (timetable-based)",
+        "tags": [
+          "journeys"
         ]
       }
     },

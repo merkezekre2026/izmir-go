@@ -304,3 +304,69 @@ class Ready(Model):
     database: bool
     active_dataset: bool
     routing: Literal["ok", "unavailable", "not_configured"]
+
+
+# --- journeys ------------------------------------------------------------------------------
+
+
+class JourneyPlace(Model):
+    name: str
+    lat: float
+    lon: float
+    stop_id: str | None = None
+    station_id: str | None = None
+
+
+class IntermediateStop(Model):
+    stop_id: str
+    name: str
+    lat: float
+    lon: float
+    scheduled_departure: datetime | None
+
+
+class JourneyLeg(Model):
+    mode: Literal["walk", "bus", "metro", "tram", "rail", "ferry", "other"]
+    start: datetime
+    end: datetime
+    duration_s: int
+    distance_m: int
+    origin: JourneyPlace
+    destination: JourneyPlace
+    route: RouteSummary | None = None
+    trip_id: str | None = None
+    headsign: str | None = None
+    service_date: date | None = None
+    intermediate_stops: list[IntermediateStop] = []
+    geometry: list[tuple[float, float]] = Field(description="[lon, lat] pairs")
+    geometry_basis: Literal["shape", "stop_to_stop", "street_network", "straight_line"]
+    is_transfer: bool = False
+    transfer_source: Literal["curated", "street_network"] | None = None
+    basis: Literal["scheduled"] = "scheduled"
+    times_approximate: bool = False
+
+
+class Journey(Model):
+    id: str
+    start: datetime
+    end: datetime
+    duration_s: int
+    transfers: int
+    walk_distance_m: int
+    modes: list[str]
+    legs: list[JourneyLeg]
+    basis: Literal["scheduled"] = Field(
+        default="scheduled",
+        description="İzmir publishes no GTFS-Realtime; journeys are timetable-based",
+    )
+
+
+class RoutingProblem(Model):
+    code: str
+    message: str
+
+
+class JourneysResponse(Model):
+    items: list[Journey]
+    routing_errors: list[RoutingProblem] = []
+    meta: Meta

@@ -34,6 +34,7 @@ log = get_logger("ingestion.pipeline")
 Acquire = Callable[[GtfsSource], FetchResult]
 # Builds a routing graph for a staged dataset; returns the routing base URL to record.
 GraphBuilder = Callable[[int, Path], str | None]
+AfterActivate = Callable[[], None]
 
 
 @dataclass
@@ -196,6 +197,7 @@ def run_pipeline(
     interchanges: Sequence[Interchange] = (),
     stations: Sequence[Station] = (),
     graph_builder: GraphBuilder | None = None,
+    after_activate: AfterActivate | None = None,
     force: bool = False,
 ) -> RunResult:
     with Session(engine) as session:
@@ -273,6 +275,8 @@ def run_pipeline(
             )
         otp_url = graph_builder(dv_id, merged_path) if graph_builder else None
         activate(engine, dv_id, otp_url=otp_url)
+        if after_activate:
+            after_activate()
         summary["retention_deleted"] = apply_retention(engine)
         result.status = "published"
         result.dataset_version_id = dv_id

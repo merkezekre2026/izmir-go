@@ -35,6 +35,9 @@ def _today() -> date:
 def run(
     sources: Annotated[list[str] | None, typer.Option(help="Limit to these source ids")] = None,
     force: Annotated[bool, typer.Option(help="Publish even if inputs are unchanged")] = False,
+    build_graph: Annotated[
+        bool, typer.Option(help="Build and serve an OTP graph (Docker)")
+    ] = False,
 ) -> None:
     """Fetch real feeds, validate, merge, stage and publish a new dataset version."""
     settings = get_settings()
@@ -42,6 +45,11 @@ def run(
     registry = load_registry(settings.sources_file)
     selected = [s for s in registry.gtfs if not sources or s.id in sources]
     raw_dir = settings.data_dir / "raw"
+    builder = None
+    if build_graph:
+        from izmirgo.ingestion.otp_build import OtpGraphBuilder
+
+        builder = OtpGraphBuilder.from_settings(settings)
     result = run_pipeline(
         get_engine(settings.database_url),
         selected,
@@ -51,6 +59,8 @@ def run(
         bbox=settings.coverage_bbox,
         interchanges=load_interchanges(REPO_ROOT / "data" / "interchanges.csv"),
         stations=load_stations(REPO_ROOT / "data" / "stations.csv"),
+        graph_builder=builder,
+        after_activate=builder.retire_others if builder else None,
         force=force,
     )
     for d in result.decisions:

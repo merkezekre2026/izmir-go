@@ -12,13 +12,14 @@ from fastapi.middleware.gzip import GZipMiddleware
 
 from izmirgo import __version__
 from izmirgo.api.errors import ErrorCode, install_error_handlers, problem
-from izmirgo.api.routers import alerts, catalog, health, places, routes, status, stops
+from izmirgo.api.routers import alerts, catalog, health, journeys, places, routes, status, stops
 from izmirgo.core.config import Settings, get_settings
 from izmirgo.core.logging import configure_logging, get_logger, truncate_ip
 from izmirgo.core.resilience import FixedWindowRateLimiter
 from izmirgo.db.session import get_engine
 from izmirgo.ingestion.sources import load_registry
 from izmirgo.providers.izmir_openapi import IzmirOpenApi
+from izmirgo.providers.otp import OtpClient
 from izmirgo.providers.photon import Photon
 
 API_PREFIX = "/api/v1"
@@ -40,6 +41,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             cache_ttl_s=settings.live_cache_ttl_s,
             user_agent=settings.user_agent,
         )
+        app.state.otp = OtpClient()
         app.state.photon = (
             Photon(settings.photon_url, settings.coverage_bbox, user_agent=settings.user_agent)
             if settings.photon_url
@@ -49,6 +51,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             yield
         finally:
             await app.state.izmir.aclose()
+            await app.state.otp.aclose()
             if app.state.photon is not None:
                 await app.state.photon.aclose()
 
@@ -101,7 +104,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return response
 
     install_error_handlers(app)
-    for module in (health, status, stops, routes, catalog, alerts, places):
+    for module in (health, status, stops, routes, journeys, catalog, alerts, places):
         app.include_router(module.router, prefix=API_PREFIX)
     return app
 

@@ -1,0 +1,15 @@
+{
+ "data": {
+  "planConnection": {
+   "searchDateTime": "2031-01-01T08:00:00+03:00",
+   "routingErrors": [
+    {
+     "code": "OUTSIDE_SERVICE_PERIOD",
+     "description": "No transit times available. The date may be past or too far in the future or there may not be transit service for your trip at the time you chose.",
+     "inputField": "DATE_TIME"
+    }
+   ],
+   "edges": []
+  }
+ }
+}

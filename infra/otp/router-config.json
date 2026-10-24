@@ -1,0 +1,19 @@
+{
+  "server": {
+    "apiProcessingTimeout": "8s"
+  },
+  "routingDefaults": {
+    "numItineraries": 5,
+    "walk": {
+      "speed": 1.33,
+      "reluctance": 2.0
+    },
+    "transferSlack": "1m",
+    "accessEgress": {
+      "maxDuration": "20m"
+    }
+  },
+  "transit": {
+    "maxNumberOfTransfers": 6
+  }
+}
