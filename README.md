@@ -59,6 +59,11 @@ dart run build_runner build --delete-conflicting-outputs
 flutter run --dart-define-from-file=config/dev.json
 ```
 
+## Releases
+
+Push a tag `vX.Y.Z` to build a release `.apk` and `.ipa` on a GitHub Release. See
+[`docs/release.md`](docs/release.md) for signing secrets.
+
 ## Data attribution
 
 Transit data comes from the İzmir Büyükşehir Belediyesi Open Data Portal (https://acikveri.bizizmir.com) and operator feeds, licensed under **CC BY 4.0**:
