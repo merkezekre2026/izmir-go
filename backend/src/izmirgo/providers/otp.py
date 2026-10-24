@@ -198,11 +198,16 @@ def _dt(value: str) -> datetime:
     return datetime.fromisoformat(value)
 
 
+# OTP names unnamed coordinates in English.
+_PLACE_NAMES_TR = {"Origin": "Başlangıç", "Destination": "Varış"}
+
+
 def _place(p: dict[str, Any]) -> PlaceOut:
     stop = p.get("stop") or {}
     parent = stop.get("parentStation") or {}
+    name = p.get("name") or ""
     return PlaceOut(
-        name=p.get("name") or "",
+        name=_PLACE_NAMES_TR.get(name, name) if not stop else name,
         lat=float(p["lat"]),
         lon=float(p["lon"]),
         stop_id=from_otp_id(stop.get("gtfsId")),

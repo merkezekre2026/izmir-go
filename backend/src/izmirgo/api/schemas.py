@@ -341,7 +341,10 @@ class JourneyLeg(Model):
     geometry: list[tuple[float, float]] = Field(description="[lon, lat] pairs")
     geometry_basis: Literal["shape", "stop_to_stop", "street_network", "straight_line"]
     is_transfer: bool = False
-    transfer_source: Literal["curated", "street_network"] | None = None
+    transfer_source: Literal["curated", "computed"] | None = Field(
+        default=None,
+        description="curated = İzmir Go interchange list; computed = walking transfer found by OTP",
+    )
     basis: Literal["scheduled"] = "scheduled"
     times_approximate: bool = False
 

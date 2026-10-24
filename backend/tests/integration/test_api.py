@@ -314,3 +314,28 @@ def test_journeys_validation_and_unavailable(client: TestClient) -> None:
     res = client.get("/api/v1/journeys", params={"from": "metro:FXM1", "to": "tram:FXT3"})
     assert res.status_code == 503
     assert res.json()["code"] == "ROUTING_UNAVAILABLE"
+
+
+def test_journey_geometry_falls_back_to_known_points(client: TestClient, engine: Engine) -> None:
+    import json
+
+    from sqlalchemy import text
+
+    with engine.begin() as conn:
+        conn.execute(text("UPDATE dataset_version SET otp_url = 'http://otp.test.invalid'"))
+    recorded = json.loads((FIXTURES / "otp" / "plan_metro_tram.json").read_text())
+    for edge in recorded["data"]["planConnection"]["edges"]:
+        for leg in edge["node"]["legs"]:
+            leg["legGeometry"] = None
+    with respx.mock() as mock:
+        mock.post("http://otp.test.invalid/otp/gtfs/v1").mock(
+            return_value=httpx.Response(200, json=recorded)
+        )
+        legs = client.get(
+            "/api/v1/journeys", params={"from": "metro:FXM1", "to": "tram:FXT3"}
+        ).json()["items"][0]["legs"]
+    metro, walk, tram = legs
+    assert walk["geometry_basis"] == "straight_line"
+    assert len(walk["geometry"]) == 2
+    assert len(tram["geometry"]) == 3  # board, one intermediate stop, alight
+    assert metro["geometry"][0] == [27.1808, 38.4425]

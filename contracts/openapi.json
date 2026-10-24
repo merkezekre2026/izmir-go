@@ -795,7 +795,7 @@
               {
                 "enum": [
                   "curated",
-                  "street_network"
+                  "computed"
                 ],
                 "type": "string"
               },
@@ -803,6 +803,7 @@
                 "type": "null"
               }
             ],
+            "description": "curated = İzmir Go interchange list; computed = walking transfer found by OTP",
             "title": "Transfer Source"
           },
           "trip_id": {

@@ -26,7 +26,15 @@ from izmirgo.core.servicetime import ISTANBUL
 from izmirgo.domain import catalog
 from izmirgo.domain.catalog import ActiveDataset
 from izmirgo.domain.ids import is_nsid
-from izmirgo.providers.otp import Endpoint, OtpClient, PlanOut, PlanRequest, RoutingUnavailable
+from izmirgo.providers.otp import (
+    Endpoint,
+    OtpClient,
+    PlaceOut,
+    PlanOut,
+    PlanRequest,
+    RoutingUnavailable,
+    StopCallOut,
+)
 
 router = APIRouter(tags=["journeys"])
 COORD_RE = re.compile(r"^\s*(-?\d{1,2}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)\s*$")
@@ -151,14 +159,23 @@ async def journeys(
         legs: list[JourneyLeg] = []
         for leg in it.legs:
             route = routes.get(leg.route_id or "")
+            geometry = leg.geometry
             if leg.mode == "walk":
-                basis = "street_network" if len(leg.geometry) > 2 else "straight_line"
+                basis = "street_network" if len(geometry) > 2 else "straight_line"
             else:
                 basis = "shape" if leg.trip_id in shaped else "stop_to_stop"
+            if len(geometry) < 2:
+                # OTP gave no geometry (e.g. no street data): draw exactly what we know.
+                points: list[PlaceOut | StopCallOut] = [
+                    leg.origin,
+                    *leg.intermediate_stops,
+                    leg.destination,
+                ]
+                geometry = [(p.lon, p.lat) for p in points]
             transfer_source = None
             if leg.is_transfer:
                 pair = (leg.origin.stop_id or "", leg.destination.stop_id or "")
-                transfer_source = "curated" if pair in curated else "street_network"
+                transfer_source = "curated" if pair in curated else "computed"
             legs.append(
                 JourneyLeg(
                     mode=leg.mode,
@@ -175,7 +192,7 @@ async def journeys(
                     intermediate_stops=[
                         IntermediateStop(**vars(s)) for s in leg.intermediate_stops
                     ],
-                    geometry=leg.geometry,
+                    geometry=geometry,
                     geometry_basis=basis,
                     is_transfer=leg.is_transfer,
                     transfer_source=transfer_source,
