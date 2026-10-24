@@ -40,6 +40,8 @@ def snapshot(
                 modes=list(s["modes"]),
                 kind="station" if s["location_type"] == 1 else "stop",
                 parent_station=s["parent_station"],
+                has_schedule=s["has_schedule"],
+                lines=list(s["lines"] or []),
             )
             for s in stops
         ],

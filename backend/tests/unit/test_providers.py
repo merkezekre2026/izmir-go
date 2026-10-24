@@ -108,3 +108,20 @@ def test_parse_photon_features() -> None:
     assert p.id == "photon:W1"
     assert p.lat == 38.43
     assert p.subtitle == "İzmir"
+
+
+def test_parse_eshot_stop_directory() -> None:
+    from izmirgo.ingestion.stop_directory import parse_eshot_stops
+
+    body = (
+        "DURAK_ID;DURAK_ADI;ENLEM;BOYLAM;DURAKTAN_GECEN_HATLAR\n"
+        "10005;Bahribaba;38.41526836260150;27.12763952722090;32\n"
+        "10007;Bahribaba;38.415144105211;27.12772009127190;29-30\n"
+        "10007;Duplicate;38.4;27.1;1\n"
+        "x;Bad id;38.4;27.1;1\n"
+        "99;Outside;41.0;29.0;1\n"
+    )
+    rows = parse_eshot_stops(body, (26.2, 37.8, 28.5, 39.4))
+    assert [r["stop_id"] for r in rows] == ["eshot:10005", "eshot:10007"]
+    assert rows[1]["lines"] == ["29", "30"]
+    assert rows[0]["search_key"] == "bahribaba"

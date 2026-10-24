@@ -294,3 +294,35 @@ class Announcement(Base):
     starts_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     ends_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     fetched_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+
+class DirectoryStop(Base):
+    """Stops known from an operator's stop list but not (currently) from a valid timetable.
+
+    ESHOT publishes its stop list twice a day independently of its GTFS. When the bus GTFS is
+    excluded (e.g. expired), these stops keep bus stops discoverable for *live* data only; the
+    API marks them `has_schedule = false`.
+    """
+
+    __tablename__ = "directory_stop"
+
+    stop_id: Mapped[str] = mapped_column(String(80), primary_key=True)
+    source: Mapped[str] = mapped_column(String(32), index=True)
+    raw_id: Mapped[str] = mapped_column(String(64))
+    name: Mapped[str] = mapped_column(Text)
+    search_key: Mapped[str] = mapped_column(Text)
+    lat: Mapped[float]
+    lon: Mapped[float]
+    geom: Mapped[Any] = mapped_column(Geometry("POINT", srid=4326, spatial_index=False))
+    lines: Mapped[list[str]] = mapped_column(ARRAY(String(16)), server_default=text("'{}'"))
+    fetched_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+    __table_args__ = (
+        Index("ix_directory_stop_geom", "geom", postgresql_using="gist"),
+        Index(
+            "ix_directory_stop_search_trgm",
+            "search_key",
+            postgresql_using="gin",
+            postgresql_ops={"search_key": "gin_trgm_ops"},
+        ),
+    )

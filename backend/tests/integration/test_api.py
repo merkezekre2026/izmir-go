@@ -235,3 +235,37 @@ def test_places_search_without_geocoder(client: TestClient) -> None:
 def test_attributions(client: TestClient) -> None:
     items = client.get("/api/v1/meta/attributions").json()["items"]
     assert {i["licence"] for i in items} == {"CC-BY-4.0", "ODbL-1.0"}
+
+
+def test_directory_stops_fill_in_when_bus_timetable_is_excluded(
+    client: TestClient, engine: Engine
+) -> None:
+    from sqlalchemy import text
+
+    with engine.begin() as conn:
+        conn.execute(
+            text(
+                "INSERT INTO directory_stop (stop_id, source, raw_id, name, search_key, lat, lon, geom, lines, fetched_at) "
+                "VALUES ('eshot:50011', 'eshot', '50011', 'Fixture Otobüs Durağı', 'fixture otobus duragi', "
+                "38.4340, 27.1712, ST_SetSRID(ST_MakePoint(27.1712, 38.4340), 4326), ARRAY['32','5'], now())"
+            )
+        )
+    near = client.get("/api/v1/nearby-stops", params={"lat": 38.4340, "lon": 27.1712}).json()
+    first = near["items"][0]
+    assert first["id"] == "eshot:50011"
+    assert first["has_schedule"] is False
+    assert first["lines"] == ["32", "5"]
+    assert next(s for s in near["items"] if s["id"] == "tram:FXT1")["has_schedule"] is True
+
+    detail = client.get("/api/v1/stops/eshot:50011").json()["stop"]
+    assert detail["live_supported"] is True
+    assert detail["routes"] == []
+    found = client.get("/api/v1/stops", params={"q": "otobus duragi"}).json()["items"]
+    assert [s["id"] for s in found] == ["eshot:50011"]
+    deps = client.get("/api/v1/stops/eshot:50011/departures").json()
+    assert deps["items"] == []
+    assert any(
+        n["code"] == "SOURCE_EXCLUDED" and n["source"] == "eshot" for n in deps["meta"]["notices"]
+    )
+    snapshot = client.get("/api/v1/catalog/snapshot").json()
+    assert any(s["id"] == "eshot:50011" and not s["has_schedule"] for s in snapshot["stops"])

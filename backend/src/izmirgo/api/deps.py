@@ -129,6 +129,8 @@ def to_stop(row: Any, **extra: Any) -> dict[str, Any]:
         "kind": "station" if row["location_type"] == 1 else "stop",
         "parent_station": row["parent_station"],
         "source": row["source"],
+        "has_schedule": row["has_schedule"],
+        "lines": list(row["lines"] or []),
         **extra,
     }
 

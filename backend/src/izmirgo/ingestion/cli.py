@@ -8,6 +8,7 @@ from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Annotated
 
+import httpx
 import typer
 from sqlalchemy import text
 
@@ -163,8 +164,30 @@ def announcements() -> None:
     settings = get_settings()
     configure_logging(settings.log_level, settings.log_format)
     url = load_registry(settings.sources_file).static_csv["eshot_announcements"]["url"]
-    count = refresh_announcements(get_engine(settings.database_url), url)
+    try:
+        count = refresh_announcements(get_engine(settings.database_url), url)
+    except httpx.HTTPError as exc:
+        typer.echo(f"announcements: fetch failed ({exc}); previous announcements kept", err=True)
+        raise typer.Exit(1) from exc
     typer.echo(f"announcements: {count}")
+
+
+@app.command("stop-directory")
+def stop_directory() -> None:
+    """Refresh the ESHOT stop directory from the official stops CSV."""
+    from izmirgo.ingestion.stop_directory import DirectoryError, refresh_eshot_directory
+
+    settings = get_settings()
+    configure_logging(settings.log_level, settings.log_format)
+    url = load_registry(settings.sources_file).static_csv["eshot_stops"]["url"]
+    try:
+        count = refresh_eshot_directory(
+            get_engine(settings.database_url), url, settings.coverage_bbox
+        )
+    except (httpx.HTTPError, DirectoryError) as exc:
+        typer.echo(f"stop-directory: {exc}; previous directory kept", err=True)
+        raise typer.Exit(1) from exc
+    typer.echo(f"stop-directory: {count} ESHOT stops")
 
 
 @app.command()

@@ -312,6 +312,10 @@
       },
       "CatalogStop": {
         "properties": {
+          "has_schedule": {
+            "title": "Has Schedule",
+            "type": "boolean"
+          },
           "id": {
             "title": "Id",
             "type": "string"
@@ -327,6 +331,14 @@
           "lat": {
             "title": "Lat",
             "type": "number"
+          },
+          "lines": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Lines",
+            "type": "array"
           },
           "lon": {
             "title": "Lon",
@@ -370,7 +382,8 @@
           "lon",
           "modes",
           "kind",
-          "parent_station"
+          "parent_station",
+          "has_schedule"
         ],
         "title": "CatalogStop",
         "type": "object"
@@ -686,6 +699,11 @@
             "title": "Distance M",
             "type": "integer"
           },
+          "has_schedule": {
+            "description": "False for stops known only from the operator's stop list (no valid timetable)",
+            "title": "Has Schedule",
+            "type": "boolean"
+          },
           "id": {
             "examples": [
               "metro:6"
@@ -704,6 +722,15 @@
           "lat": {
             "title": "Lat",
             "type": "number"
+          },
+          "lines": {
+            "default": [],
+            "description": "Line numbers from the operator's stop list (directory stops only)",
+            "items": {
+              "type": "string"
+            },
+            "title": "Lines",
+            "type": "array"
           },
           "lon": {
             "title": "Lon",
@@ -752,6 +779,7 @@
           "modes",
           "kind",
           "source",
+          "has_schedule",
           "distance_m"
         ],
         "title": "NearbyStop",
@@ -1531,6 +1559,11 @@
             ],
             "title": "Code"
           },
+          "has_schedule": {
+            "description": "False for stops known only from the operator's stop list (no valid timetable)",
+            "title": "Has Schedule",
+            "type": "boolean"
+          },
           "id": {
             "examples": [
               "metro:6"
@@ -1549,6 +1582,15 @@
           "lat": {
             "title": "Lat",
             "type": "number"
+          },
+          "lines": {
+            "default": [],
+            "description": "Line numbers from the operator's stop list (directory stops only)",
+            "items": {
+              "type": "string"
+            },
+            "title": "Lines",
+            "type": "array"
           },
           "live_supported": {
             "description": "Whether live approaching-vehicle data exists here",
@@ -1621,6 +1663,7 @@
           "modes",
           "kind",
           "source",
+          "has_schedule",
           "live_supported"
         ],
         "title": "StopDetail",
@@ -1686,6 +1729,11 @@
             ],
             "title": "Code"
           },
+          "has_schedule": {
+            "description": "False for stops known only from the operator's stop list (no valid timetable)",
+            "title": "Has Schedule",
+            "type": "boolean"
+          },
           "id": {
             "examples": [
               "metro:6"
@@ -1704,6 +1752,15 @@
           "lat": {
             "title": "Lat",
             "type": "number"
+          },
+          "lines": {
+            "default": [],
+            "description": "Line numbers from the operator's stop list (directory stops only)",
+            "items": {
+              "type": "string"
+            },
+            "title": "Lines",
+            "type": "array"
           },
           "lon": {
             "title": "Lon",
@@ -1751,7 +1808,8 @@
           "lon",
           "modes",
           "kind",
-          "source"
+          "source",
+          "has_schedule"
         ],
         "title": "StopSummary",
         "type": "object"

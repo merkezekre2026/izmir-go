@@ -15,6 +15,13 @@ from izmirgo.domain.search_text import fold
 STOP_COLS = (
     "s.stop_id, s.name, s.code, s.lat, s.lon, s.modes, s.location_type, s.parent_station, s.source"
 )
+# Timetable stops and directory stops (known only from an operator's stop list) share one shape.
+GTFS_STOP_COLS = STOP_COLS + ", true AS has_schedule, CAST('{}' AS varchar[]) AS lines"
+DIR_STOP_COLS = (
+    "d.stop_id, d.name, CAST(NULL AS varchar) AS code, d.lat, d.lon, "
+    "CAST(ARRAY['bus'] AS varchar[]) AS modes, 0 AS location_type, "  # only ESHOT (bus) today
+    "CAST(NULL AS varchar) AS parent_station, d.source, false AS has_schedule, d.lines"
+)
 ROUTE_COLS = (
     "r.route_id, r.line_key, r.short_name, r.long_name, r.mode, r.color, r.text_color, r.source, "
     "r.times_approximate"
@@ -82,6 +89,19 @@ def last_run(conn: Connection) -> RowMapping | None:
     )
 
 
+def directory_sources(conn: Connection, dv: int) -> list[str]:
+    """Sources whose directory stops should be exposed: those without timetable coverage."""
+    return list(
+        conn.execute(
+            text(
+                "SELECT DISTINCT source FROM directory_stop WHERE source NOT IN ("
+                "SELECT source FROM source_coverage WHERE dataset_version_id = :dv AND status = 'included')"
+            ),
+            {"dv": dv},
+        ).scalars()
+    )
+
+
 def search_stops(
     conn: Connection,
     dv: int,
@@ -92,8 +112,13 @@ def search_stops(
     limit: int,
     offset: int,
 ) -> Sequence[RowMapping]:
-    where = ["s.dataset_version_id = :dv", "(s.parent_station IS NULL OR s.location_type = 1)"]
-    params: dict[str, Any] = {"dv": dv, "limit": limit, "offset": offset}
+    where = ["(s.parent_station IS NULL OR s.location_type = 1)"]
+    params: dict[str, Any] = {
+        "dv": dv,
+        "limit": limit,
+        "offset": offset,
+        "dirs": directory_sources(conn, dv),
+    }
     order = "s.name, s.stop_id"
     if q:
         key = fold(q)
@@ -112,18 +137,40 @@ def search_stops(
     if bbox:
         where.append("s.geom && ST_MakeEnvelope(:x1, :y1, :x2, :y2, 4326)")
         params.update(x1=bbox[0], y1=bbox[1], x2=bbox[2], y2=bbox[3])
-    sql = f"SELECT {STOP_COLS} FROM stop s WHERE {' AND '.join(where)} ORDER BY {order} LIMIT :limit OFFSET :offset"
+    union = (
+        f"SELECT {GTFS_STOP_COLS}, s.search_key, s.raw_id, s.geom FROM stop s "
+        "WHERE s.dataset_version_id = :dv "
+        f"UNION ALL SELECT {DIR_STOP_COLS}, d.search_key, d.raw_id, d.geom FROM directory_stop d "
+        "WHERE d.source = ANY(:dirs)"
+    )
+    sql = (
+        f"SELECT * FROM ({union}) s WHERE {' AND '.join(where)} "
+        f"ORDER BY {order} LIMIT :limit OFFSET :offset"
+    )
     return conn.execute(text(sql), params).mappings().all()
 
 
 def get_stop(conn: Connection, dv: int, stop_id: str) -> RowMapping | None:
-    return (
+    row = (
         conn.execute(
             text(
-                f"SELECT {STOP_COLS}, s.wheelchair_boarding FROM stop s "
+                f"SELECT {GTFS_STOP_COLS}, s.wheelchair_boarding FROM stop s "
                 "WHERE s.dataset_version_id = :dv AND s.stop_id = :id"
             ),
             {"dv": dv, "id": stop_id},
+        )
+        .mappings()
+        .first()
+    )
+    if row is not None:
+        return row
+    return (
+        conn.execute(
+            text(
+                f"SELECT {DIR_STOP_COLS}, CAST(NULL AS smallint) AS wheelchair_boarding "
+                "FROM directory_stop d WHERE d.stop_id = :id AND d.source = ANY(:dirs)"
+            ),
+            {"id": stop_id, "dirs": directory_sources(conn, dv)},
         )
         .mappings()
         .first()
@@ -134,7 +181,7 @@ def stop_children(conn: Connection, dv: int, station_id: str) -> Sequence[RowMap
     return (
         conn.execute(
             text(
-                f"SELECT {STOP_COLS} FROM stop s WHERE s.dataset_version_id = :dv "
+                f"SELECT {GTFS_STOP_COLS} FROM stop s WHERE s.dataset_version_id = :dv "
                 "AND s.parent_station = :id ORDER BY s.source, s.name"
             ),
             {"dv": dv, "id": station_id},
@@ -180,20 +227,44 @@ def nearby_stops(
     if modes:
         mode_filter = "AND s.modes && CAST(:modes AS varchar[])"
         params["modes"] = list(modes)
-    sql = f"""
-        WITH p AS (SELECT ST_SetSRID(ST_MakePoint(:lon, :lat), 4326) AS g),
-        candidates AS (
-            SELECT {STOP_COLS}, s.geom FROM stop s, p
-            WHERE s.dataset_version_id = :dv AND s.location_type = 0 AND cardinality(s.modes) > 0
-              {mode_filter}
-            ORDER BY s.geom <-> p.g LIMIT 200
+
+    def knn(select_cols: str, table_filter: str) -> str:
+        # KNN on the GiST index per table, then exact geography distance.
+        return f"""
+            WITH p AS (SELECT ST_SetSRID(ST_MakePoint(:lon, :lat), 4326) AS g),
+            candidates AS (
+                SELECT * FROM (SELECT {select_cols}, geom FROM {table_filter}) s, p
+                WHERE true {mode_filter}
+                ORDER BY s.geom <-> p.g LIMIT 200
+            )
+            SELECT c.*, round(ST_Distance(c.geom::geography, c.g::geography))::int AS distance_m
+            FROM candidates c
+            WHERE ST_DWithin(c.geom::geography, c.g::geography, :r)
+            ORDER BY distance_m, c.stop_id LIMIT :limit
+        """
+
+    rows = list(
+        conn.execute(
+            text(
+                knn(
+                    GTFS_STOP_COLS,
+                    "stop s WHERE s.dataset_version_id = :dv AND s.location_type = 0 "
+                    "AND cardinality(s.modes) > 0",
+                )
+            ),
+            params,
+        ).mappings()
+    )
+    dirs = directory_sources(conn, dv)
+    if dirs:
+        params["dirs"] = dirs
+        rows += list(
+            conn.execute(
+                text(knn(DIR_STOP_COLS, "directory_stop d WHERE d.source = ANY(:dirs)")), params
+            ).mappings()
         )
-        SELECT c.*, round(ST_Distance(c.geom::geography, p.g::geography))::int AS distance_m
-        FROM candidates c, p
-        WHERE ST_DWithin(c.geom::geography, p.g::geography, :r)
-        ORDER BY distance_m, c.stop_id LIMIT :limit
-    """
-    return conn.execute(text(sql), params).mappings().all()
+    rows.sort(key=lambda r: (r["distance_m"], r["stop_id"]))
+    return rows[:limit]
 
 
 def departures(
@@ -320,7 +391,7 @@ def route_patterns(conn: Connection, dv: int, route_id: str) -> list[dict[str, A
             r["stop_id"]: r
             for r in conn.execute(
                 text(
-                    f"SELECT {STOP_COLS} FROM stop s WHERE s.dataset_version_id = :dv AND s.stop_id = ANY(:ids)"
+                    f"SELECT {GTFS_STOP_COLS} FROM stop s WHERE s.dataset_version_id = :dv AND s.stop_id = ANY(:ids)"
                 ),
                 {"dv": dv, "ids": stop_ids},
             ).mappings()
@@ -376,10 +447,12 @@ def catalog(conn: Connection, dv: int) -> tuple[Sequence[RowMapping], Sequence[R
     stops = (
         conn.execute(
             text(
-                f"SELECT {STOP_COLS} FROM stop s WHERE s.dataset_version_id = :dv "
-                "AND (cardinality(s.modes) > 0) ORDER BY s.stop_id"
+                f"SELECT {GTFS_STOP_COLS} FROM stop s WHERE s.dataset_version_id = :dv "
+                "AND (cardinality(s.modes) > 0) "
+                f"UNION ALL SELECT {DIR_STOP_COLS} FROM directory_stop d WHERE d.source = ANY(:dirs) "
+                "ORDER BY stop_id"
             ),
-            {"dv": dv},
+            {"dv": dv, "dirs": directory_sources(conn, dv)},
         )
         .mappings()
         .all()

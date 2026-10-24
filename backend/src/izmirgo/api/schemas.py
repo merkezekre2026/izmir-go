@@ -64,6 +64,12 @@ class StopSummary(Model):
     kind: Literal["stop", "station"]
     parent_station: str | None = None
     source: str
+    has_schedule: bool = Field(
+        description="False for stops known only from the operator's stop list (no valid timetable)"
+    )
+    lines: list[str] = Field(
+        default=[], description="Line numbers from the operator's stop list (directory stops only)"
+    )
 
 
 class NearbyStop(StopSummary):
@@ -255,6 +261,8 @@ class CatalogStop(Model):
     modes: list[Mode]
     kind: Literal["stop", "station"]
     parent_station: str | None
+    has_schedule: bool
+    lines: list[str] = []
 
 
 class CatalogSnapshot(Model):

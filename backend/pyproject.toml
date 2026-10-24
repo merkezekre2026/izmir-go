@@ -60,7 +60,7 @@ allowed-confusables = ["ı", "İ", "×", "–"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S", "PLR2004"]
-"migrations/**" = ["N999"]
+"migrations/**" = ["N999", "RUF100", "E501"]
 # Query modules compose SQL from constant fragments only; every user value is a bind parameter.
 "src/izmirgo/domain/catalog.py" = ["S608"]
 "src/izmirgo/ingestion/stage.py" = ["S608"]
