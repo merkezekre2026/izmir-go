@@ -156,6 +156,18 @@ def status() -> None:
 
 
 @app.command()
+def announcements() -> None:
+    """Refresh ESHOT line announcements from the official CSV."""
+    from izmirgo.ingestion.announcements import refresh_announcements
+
+    settings = get_settings()
+    configure_logging(settings.log_level, settings.log_format)
+    url = load_registry(settings.sources_file).static_csv["eshot_announcements"]["url"]
+    count = refresh_announcements(get_engine(settings.database_url), url)
+    typer.echo(f"announcements: {count}")
+
+
+@app.command()
 def rollback() -> None:
     """Re-activate the previous dataset version."""
     settings = get_settings()
