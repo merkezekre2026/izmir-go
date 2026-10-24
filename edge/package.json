@@ -1,0 +1,18 @@
+{
+  "name": "izmir-go-edge",
+  "private": true,
+  "description": "İzmir Go API on Cloudflare Workers (free plan): static bundle + in-Worker journey planning",
+  "type": "module",
+  "scripts": {
+    "bundle": "cd ../backend && uv run izmirgo-ingest build-bundle --out ../edge/public/data --require metro --require tram",
+    "bundle:fixtures": "cd ../backend && uv run izmirgo-ingest build-bundle --out ../edge/public/data --fixtures",
+    "dev": "wrangler dev",
+    "typecheck": "tsc --noEmit",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261007.1",
+    "typescript": "7.0.2",
+    "wrangler": "4.148.0"
+  }
+}

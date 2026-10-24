@@ -24,6 +24,7 @@ The app never fabricates transport information. Every departure and journey is l
 | `contracts/openapi.json` | API contract generated from the backend (committed; CI checks it is in sync) |
 | `packages/api_client/` | Dart client generated from the contract |
 | `data/` | Source registry and curated transfer/station data |
+| `edge/` | Free Cloudflare Workers version of the API (static bundle + in-Worker routing) |
 | `infra/` | Docker Compose, OpenTripPlanner config, Caddy, ops scripts |
 | `docs/` | Architecture, ADRs, data sources, runbooks |
 | `scripts/` | Developer helper scripts |
@@ -58,6 +59,11 @@ flutter pub get
 dart run build_runner build --delete-conflicting-outputs
 flutter run --dart-define-from-file=config/dev.json
 ```
+
+## Free deployment (Cloudflare Workers)
+
+The API can run for free on Cloudflare Workers (`edge/`), deployed daily by GitHub Actions. See
+[`docs/deploy-cloudflare.md`](docs/deploy-cloudflare.md).
 
 ## Releases
 

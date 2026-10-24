@@ -58,7 +58,7 @@ Store** profile gives an IPA for TestFlight/App Store Connect. Set the repositor
 
 | Variable | Purpose |
 |---|---|
-| `API_BASE_URL` | API the release app uses (default `config/prod.json`, currently a placeholder) |
+| `API_BASE_URL` | API the release app uses, e.g. `https://izmir-go-api.<subdomain>.workers.dev/api/v1` (see docs/deploy-cloudflare.md) |
 | `ANDROID_APPLICATION_ID` | Replaces the `com.example.izmir_go` placeholder |
 | `IOS_EXPORT_METHOD` | `release-testing` (ad-hoc, default), `app-store-connect` or `enterprise` |
 
