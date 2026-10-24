@@ -6,7 +6,8 @@
 |---|---|
 | Push a tag `vX.Y.Z` (e.g. `git tag v0.1.0 && git push origin v0.1.0`) | GitHub Release with the APK, the IPA and `SHA256SUMS.txt` |
 | Tag with a suffix (`v0.2.0-beta.1`) | Same, marked as a pre-release (store version `0.2.0`) |
-| Actions → release → Run workflow | Builds only; files are downloadable as run artifacts |
+| Actions → release → Run workflow with `tag` = `v0.1.0` | Same as pushing the tag; GitHub creates the tag on the selected branch's commit |
+| Actions → release → Run workflow with `tag` empty | Builds only; files are downloadable as run artifacts |
 
 The version name comes from the tag; the build number is the workflow run number, so it always
 increases.
