@@ -1,0 +1,9 @@
+{
+  "transitFeeds": [
+    { "type": "gtfs", "source": "izmirgo.gtfs.zip", "feedId": "izm" }
+  ],
+  "osm": [
+    { "source": "izmir.osm.pbf", "osmTagMapping": "default" }
+  ],
+  "maxTransferDuration": "PT15M"
+}

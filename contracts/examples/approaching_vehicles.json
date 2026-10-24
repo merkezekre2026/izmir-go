@@ -1,0 +1,23 @@
+{
+  "stop_id": "eshot:10005",
+  "supported": true,
+  "basis": "live",
+  "fetched_at": "2026-10-24T17:00:43.958905Z",
+  "source": "ESHOT · İzmir Büyükşehir Belediyesi Açık Veri (CC BY 4.0)",
+  "items": [
+    {
+      "line_number": "32",
+      "line_name": "SYNTHETIC FIXTURE",
+      "route_id": null,
+      "color": null,
+      "direction": 1,
+      "remaining_stops": 2,
+      "lat": 38.4352,
+      "lon": 27.1713,
+      "vehicle_id": "1",
+      "wheelchair_accessible": true,
+      "bike_rack": false
+    }
+  ],
+  "notice": null
+}

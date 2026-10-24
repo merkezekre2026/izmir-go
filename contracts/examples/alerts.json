@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "id": "eshot:1",
+      "source": "eshot",
+      "line_short_name": "990",
+      "route_ids": [],
+      "title": "SYNTHETIC: Fixture hat güzergah değişikliği",
+      "starts_at": "2026-10-24T17:00:43.817588Z",
+      "ends_at": "2026-10-31T17:00:43.817588Z",
+      "fetched_at": "2026-10-24T17:00:43.817588Z",
+      "kind": "announcement"
+    }
+  ],
+  "generated_at": "2026-10-24T17:00:44.055933Z"
+}

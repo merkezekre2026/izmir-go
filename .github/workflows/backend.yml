@@ -1,0 +1,52 @@
+name: backend
+
+on:
+  pull_request:
+    paths: ["backend/**", "data/**", "contracts/**", ".github/workflows/backend.yml"]
+  push:
+    branches: [main]
+    paths: ["backend/**", "data/**", "contracts/**", ".github/workflows/backend.yml"]
+
+concurrency:
+  group: backend-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.32"
+      - run: uv python install 3.13
+      - run: uv sync --frozen
+      - name: Lint
+        run: uv run ruff check . && uv run ruff format --check .
+      - name: Type check
+        run: uv run mypy
+      - name: Unit + DB tests (PostGIS via testcontainers)
+        run: uv run pytest -m "not network and not otp" -o addopts="--strict-markers"
+      - name: OpenAPI contract is in sync
+        run: |
+          uv run python -m izmirgo.api.export_openapi /tmp/openapi.json
+          diff -u ../contracts/openapi.json /tmp/openapi.json
+
+  otp-journeys:
+    runs-on: ubuntu-24.04
+    needs: checks
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.32"
+      - run: uv python install 3.13
+      - run: uv sync --frozen
+      - name: Fixture journey tests against a real OTP 2.10 container
+        run: uv run pytest -m otp -o addopts="--strict-markers"

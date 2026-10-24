@@ -1,0 +1,3 @@
+station_id,name,member_stop_ids,evidence
+stn:fx-halkapinar,Fixture Halkapınar Aktarma,metro:FXM2 tram:FXT1,SYNTHETIC
+stn:fx-lonely,Fixture Lonely,metro:FXM1 metro:NOPE,SYNTHETIC only one member exists (must be skipped)

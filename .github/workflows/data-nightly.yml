@@ -1,0 +1,38 @@
+name: data-nightly
+
+# Real-data checks: fetch the operators' feeds, validate them, build an OTP graph with the
+# İzmir OSM extract and run golden journeys. Reports only; never publishes anything.
+on:
+  schedule:
+    - cron: "17 2 * * *"   # 05:17 Europe/Istanbul
+  workflow_dispatch:
+
+jobs:
+  real-data:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.32"
+      - run: uv python install 3.13
+      - run: uv sync --frozen
+      - name: Install osmium
+        run: sudo apt-get update -q && sudo apt-get install -y -q osmium-tool
+      - name: Cache OSM extract
+        uses: actions/cache@v4
+        with:
+          path: var/osm
+          key: osm-${{ github.run_id }}
+          restore-keys: osm-
+      - name: Fetch and clip OSM
+        working-directory: .
+        run: ./scripts/fetch-osm.sh
+      - name: Golden real-data scenarios
+        env:
+          IZMIRGO_OSM_PATH: ${{ github.workspace }}/var/osm/izmir.osm.pbf
+        run: uv run pytest -m "network and otp" -o addopts="--strict-markers" -v

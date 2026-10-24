@@ -1,0 +1,4 @@
+stop_id,stop_name,stop_lat,stop_lon,location_type
+FXM1,Fixture Stadyum,38.442500,27.180800,0
+FXM2,Fixture Halkapınar Metro,38.435000,27.168600,0
+FXM3,Fixture Hilal,38.427500,27.156400,0

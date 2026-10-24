@@ -1,0 +1,815 @@
+{
+  "route_id": "metro:FX1",
+  "service_date": "2026-10-28",
+  "items": [
+    {
+      "trip_id": "metro:FXM_WD_0_001",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T06:00:00+03:00",
+      "last_arrival": "2026-10-28T06:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_002",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T06:10:00+03:00",
+      "last_arrival": "2026-10-28T06:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_003",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T06:20:00+03:00",
+      "last_arrival": "2026-10-28T06:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_004",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T06:30:00+03:00",
+      "last_arrival": "2026-10-28T06:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_005",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T06:40:00+03:00",
+      "last_arrival": "2026-10-28T06:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_006",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T06:50:00+03:00",
+      "last_arrival": "2026-10-28T06:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_007",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T07:00:00+03:00",
+      "last_arrival": "2026-10-28T07:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_008",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T07:10:00+03:00",
+      "last_arrival": "2026-10-28T07:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_009",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T07:20:00+03:00",
+      "last_arrival": "2026-10-28T07:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_010",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T07:30:00+03:00",
+      "last_arrival": "2026-10-28T07:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_011",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T07:40:00+03:00",
+      "last_arrival": "2026-10-28T07:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_012",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T07:50:00+03:00",
+      "last_arrival": "2026-10-28T07:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_013",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T08:00:00+03:00",
+      "last_arrival": "2026-10-28T08:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_014",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T08:10:00+03:00",
+      "last_arrival": "2026-10-28T08:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_015",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T08:20:00+03:00",
+      "last_arrival": "2026-10-28T08:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_016",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T08:30:00+03:00",
+      "last_arrival": "2026-10-28T08:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_017",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T08:40:00+03:00",
+      "last_arrival": "2026-10-28T08:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_018",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T08:50:00+03:00",
+      "last_arrival": "2026-10-28T08:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_019",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T09:00:00+03:00",
+      "last_arrival": "2026-10-28T09:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_020",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T09:10:00+03:00",
+      "last_arrival": "2026-10-28T09:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_021",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T09:20:00+03:00",
+      "last_arrival": "2026-10-28T09:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_022",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T09:30:00+03:00",
+      "last_arrival": "2026-10-28T09:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_023",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T09:40:00+03:00",
+      "last_arrival": "2026-10-28T09:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_024",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T09:50:00+03:00",
+      "last_arrival": "2026-10-28T09:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_025",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T10:00:00+03:00",
+      "last_arrival": "2026-10-28T10:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_026",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T10:10:00+03:00",
+      "last_arrival": "2026-10-28T10:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_027",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T10:20:00+03:00",
+      "last_arrival": "2026-10-28T10:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_028",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T10:30:00+03:00",
+      "last_arrival": "2026-10-28T10:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_029",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T10:40:00+03:00",
+      "last_arrival": "2026-10-28T10:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_030",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T10:50:00+03:00",
+      "last_arrival": "2026-10-28T10:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_031",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T11:00:00+03:00",
+      "last_arrival": "2026-10-28T11:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_032",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T11:10:00+03:00",
+      "last_arrival": "2026-10-28T11:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_033",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T11:20:00+03:00",
+      "last_arrival": "2026-10-28T11:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_034",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T11:30:00+03:00",
+      "last_arrival": "2026-10-28T11:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_035",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T11:40:00+03:00",
+      "last_arrival": "2026-10-28T11:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_036",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T11:50:00+03:00",
+      "last_arrival": "2026-10-28T11:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_037",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T12:00:00+03:00",
+      "last_arrival": "2026-10-28T12:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_038",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T12:10:00+03:00",
+      "last_arrival": "2026-10-28T12:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_039",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T12:20:00+03:00",
+      "last_arrival": "2026-10-28T12:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_040",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T12:30:00+03:00",
+      "last_arrival": "2026-10-28T12:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_041",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T12:40:00+03:00",
+      "last_arrival": "2026-10-28T12:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_042",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T12:50:00+03:00",
+      "last_arrival": "2026-10-28T12:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_043",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T13:00:00+03:00",
+      "last_arrival": "2026-10-28T13:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_044",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T13:10:00+03:00",
+      "last_arrival": "2026-10-28T13:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_045",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T13:20:00+03:00",
+      "last_arrival": "2026-10-28T13:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_046",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T13:30:00+03:00",
+      "last_arrival": "2026-10-28T13:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_047",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T13:40:00+03:00",
+      "last_arrival": "2026-10-28T13:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_048",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T13:50:00+03:00",
+      "last_arrival": "2026-10-28T13:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_049",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T14:00:00+03:00",
+      "last_arrival": "2026-10-28T14:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_050",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T14:10:00+03:00",
+      "last_arrival": "2026-10-28T14:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_051",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T14:20:00+03:00",
+      "last_arrival": "2026-10-28T14:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_052",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T14:30:00+03:00",
+      "last_arrival": "2026-10-28T14:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_053",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T14:40:00+03:00",
+      "last_arrival": "2026-10-28T14:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_054",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T14:50:00+03:00",
+      "last_arrival": "2026-10-28T14:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_055",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T15:00:00+03:00",
+      "last_arrival": "2026-10-28T15:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_056",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T15:10:00+03:00",
+      "last_arrival": "2026-10-28T15:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_057",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T15:20:00+03:00",
+      "last_arrival": "2026-10-28T15:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_058",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T15:30:00+03:00",
+      "last_arrival": "2026-10-28T15:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_059",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T15:40:00+03:00",
+      "last_arrival": "2026-10-28T15:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_060",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T15:50:00+03:00",
+      "last_arrival": "2026-10-28T15:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_061",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T16:00:00+03:00",
+      "last_arrival": "2026-10-28T16:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_062",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T16:10:00+03:00",
+      "last_arrival": "2026-10-28T16:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_063",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T16:20:00+03:00",
+      "last_arrival": "2026-10-28T16:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_064",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T16:30:00+03:00",
+      "last_arrival": "2026-10-28T16:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_065",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T16:40:00+03:00",
+      "last_arrival": "2026-10-28T16:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_066",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T16:50:00+03:00",
+      "last_arrival": "2026-10-28T16:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_067",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T17:00:00+03:00",
+      "last_arrival": "2026-10-28T17:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_068",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T17:10:00+03:00",
+      "last_arrival": "2026-10-28T17:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_069",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T17:20:00+03:00",
+      "last_arrival": "2026-10-28T17:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_070",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T17:30:00+03:00",
+      "last_arrival": "2026-10-28T17:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_071",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T17:40:00+03:00",
+      "last_arrival": "2026-10-28T17:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_072",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T17:50:00+03:00",
+      "last_arrival": "2026-10-28T17:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_073",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T18:00:00+03:00",
+      "last_arrival": "2026-10-28T18:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_074",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T18:10:00+03:00",
+      "last_arrival": "2026-10-28T18:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_075",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T18:20:00+03:00",
+      "last_arrival": "2026-10-28T18:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_076",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T18:30:00+03:00",
+      "last_arrival": "2026-10-28T18:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_077",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T18:40:00+03:00",
+      "last_arrival": "2026-10-28T18:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_078",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T18:50:00+03:00",
+      "last_arrival": "2026-10-28T18:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_079",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T19:00:00+03:00",
+      "last_arrival": "2026-10-28T19:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_080",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T19:10:00+03:00",
+      "last_arrival": "2026-10-28T19:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_081",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T19:20:00+03:00",
+      "last_arrival": "2026-10-28T19:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_082",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T19:30:00+03:00",
+      "last_arrival": "2026-10-28T19:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_083",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T19:40:00+03:00",
+      "last_arrival": "2026-10-28T19:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_084",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T19:50:00+03:00",
+      "last_arrival": "2026-10-28T19:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_085",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T20:00:00+03:00",
+      "last_arrival": "2026-10-28T20:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_086",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T20:10:00+03:00",
+      "last_arrival": "2026-10-28T20:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_087",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T20:20:00+03:00",
+      "last_arrival": "2026-10-28T20:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_088",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T20:30:00+03:00",
+      "last_arrival": "2026-10-28T20:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_089",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T20:40:00+03:00",
+      "last_arrival": "2026-10-28T20:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_090",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T20:50:00+03:00",
+      "last_arrival": "2026-10-28T20:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_091",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T21:00:00+03:00",
+      "last_arrival": "2026-10-28T21:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_092",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T21:10:00+03:00",
+      "last_arrival": "2026-10-28T21:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_093",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T21:20:00+03:00",
+      "last_arrival": "2026-10-28T21:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_094",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T21:30:00+03:00",
+      "last_arrival": "2026-10-28T21:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_095",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T21:40:00+03:00",
+      "last_arrival": "2026-10-28T21:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_096",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T21:50:00+03:00",
+      "last_arrival": "2026-10-28T21:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_097",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T22:00:00+03:00",
+      "last_arrival": "2026-10-28T22:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_098",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T22:10:00+03:00",
+      "last_arrival": "2026-10-28T22:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_099",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T22:20:00+03:00",
+      "last_arrival": "2026-10-28T22:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_100",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T22:30:00+03:00",
+      "last_arrival": "2026-10-28T22:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_101",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T22:40:00+03:00",
+      "last_arrival": "2026-10-28T22:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_102",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T22:50:00+03:00",
+      "last_arrival": "2026-10-28T22:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_103",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T23:00:00+03:00",
+      "last_arrival": "2026-10-28T23:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_104",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T23:10:00+03:00",
+      "last_arrival": "2026-10-28T23:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_105",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T23:20:00+03:00",
+      "last_arrival": "2026-10-28T23:25:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_106",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T23:30:00+03:00",
+      "last_arrival": "2026-10-28T23:35:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_107",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T23:40:00+03:00",
+      "last_arrival": "2026-10-28T23:45:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_108",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-28T23:50:00+03:00",
+      "last_arrival": "2026-10-28T23:55:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_109",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-29T00:00:00+03:00",
+      "last_arrival": "2026-10-29T00:05:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_110",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-29T00:10:00+03:00",
+      "last_arrival": "2026-10-29T00:15:00+03:00"
+    },
+    {
+      "trip_id": "metro:FXM_WD_0_111",
+      "direction_id": 0,
+      "headsign": "Fixture FXM3",
+      "first_departure": "2026-10-29T00:20:00+03:00",
+      "last_arrival": "2026-10-29T00:25:00+03:00"
+    }
+  ],
+  "meta": {
+    "dataset": {
+      "id": 1,
+      "label": "20261024T1700Z-0443592b",
+      "published_at": "2026-10-24T17:00:43.725788Z"
+    },
+    "generated_at": "2026-10-24T17:00:44.008189Z",
+    "sources": [
+      {
+        "source": "metro",
+        "valid_from": "2026-01-01",
+        "valid_to": "2027-12-31"
+      },
+      {
+        "source": "tram",
+        "valid_from": "2026-01-01",
+        "valid_to": "2027-12-31"
+      }
+    ],
+    "notices": [
+      {
+        "code": "SOURCE_EXCLUDED",
+        "message": "ESHOT otobüs tarifeleri dahil değil: tarife geçerlilik süresi dolmuş.",
+        "source": "eshot"
+      },
+      {
+        "code": "NO_HOLIDAY_CALENDAR",
+        "message": "Resmî tatillerde sefer saatleri farklı olabilir; operatörler tatil takvimi yayımlamıyor.",
+        "source": null
+      }
+    ]
+  }
+}

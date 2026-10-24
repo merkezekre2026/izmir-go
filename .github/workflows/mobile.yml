@@ -1,0 +1,67 @@
+name: mobile
+
+on:
+  pull_request:
+    paths: ["apps/mobile/**", "contracts/**", ".github/workflows/mobile.yml"]
+  push:
+    branches: [main]
+    paths: ["apps/mobile/**", "contracts/**", ".github/workflows/mobile.yml"]
+
+concurrency:
+  group: mobile-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.47.8"
+          channel: stable
+      - run: flutter pub get
+      - run: dart run build_runner build --delete-conflicting-outputs
+      - name: Generated code is committed and current
+        run: git diff --exit-code -- lib
+      - run: dart format --output=none --set-exit-if-changed lib test
+      - run: flutter analyze
+      - run: flutter test
+
+  android-build:
+    runs-on: ubuntu-24.04
+    needs: checks
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.47.8"
+          channel: stable
+      - run: flutter pub get
+      - run: flutter build apk --debug --dart-define-from-file=config/dev.json
+
+  ios-build:
+    runs-on: macos-15
+    needs: checks
+    if: github.event_name == 'push'
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.47.8"
+          channel: stable
+      - run: flutter pub get
+      - run: flutter build ios --no-codesign --debug --dart-define-from-file=config/dev.json

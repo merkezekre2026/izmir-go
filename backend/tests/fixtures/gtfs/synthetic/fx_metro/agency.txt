@@ -1,0 +1,2 @@
+agency_id,agency_name,agency_url,agency_timezone,agency_lang
+FXM,Fixture Metro (SYNTHETIC TEST DATA - not a real timetable),https://example.invalid/,Europe/Istanbul,tr

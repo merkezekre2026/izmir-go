@@ -1,0 +1,4 @@
+stop_id,stop_name,stop_lat,stop_lon,location_type
+FXT1,Fixture Halkapınar Tram,38.433952,27.171507,0
+FXT2,Fixture Havagazı,38.439858,27.158134,0
+FXT3,Fixture Alsancak Gar,38.439586,27.148271,0

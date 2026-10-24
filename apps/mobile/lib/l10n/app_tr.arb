@@ -1,0 +1,247 @@
+{
+  "@@locale": "tr",
+  "appTitle": "İzmir Go",
+  "tabRoute": "Rota",
+  "tabNearby": "Yakınımda",
+  "tabLines": "Hatlar",
+  "tabSaved": "Kaydedilenler",
+  "settings": "Ayarlar",
+  "from": "Nereden",
+  "to": "Nereye",
+  "swap": "Başlangıç ve varışı değiştir",
+  "myLocation": "Konumum",
+  "searchPlaceHint": "Durak, istasyon veya adres ara",
+  "pickOnMap": "Haritadan seç",
+  "departNow": "Şimdi",
+  "departAt": "Kalkış",
+  "arriveBy": "Varış",
+  "findRoutes": "Rota bul",
+  "chooseOriginAndDestination": "Başlangıç ve varış noktasını seçin.",
+  "recentPlaces": "Son aramalar",
+  "clearRecent": "Geçmişi temizle",
+  "results": "Rotalar",
+  "minutesShort": "{minutes} dk",
+  "@minutesShort": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "transfers": "{count, plural, =0{Aktarmasız} =1{1 aktarma} other{{count} aktarma}}",
+  "@transfers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "walkMeters": "{meters} m yürüme",
+  "@walkMeters": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "walkOnly": "Yürüyerek",
+  "noJourneys": "Bu saatte uygun sefer bulunamadı.",
+  "noJourneysHint": "Farklı bir saat deneyin veya başlangıç noktasını değiştirin.",
+  "scheduledBasis": "Tarifeye göre",
+  "scheduledBasisExplain": "Süreler operatörlerin yayımladığı tarifelere dayanır; anlık trafik veya gecikme bilgisi içermez.",
+  "approximateTimes": "Yaklaşık saatler",
+  "liveBasis": "Canlı",
+  "cachedBasis": "Önbellek",
+  "journeyDetail": "Yolculuk ayrıntısı",
+  "walkTo": "{name} yönüne yürüyün",
+  "@walkTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "transferWalk": "Aktarma: yaklaşık {meters} m yürüyün",
+  "@transferWalk": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "boardAt": "{stop} durağından binin",
+  "@boardAt": {
+    "placeholders": {
+      "stop": {
+        "type": "String"
+      }
+    }
+  },
+  "alightAt": "{stop} durağında inin",
+  "@alightAt": {
+    "placeholders": {
+      "stop": {
+        "type": "String"
+      }
+    }
+  },
+  "towards": "{headsign} yönü",
+  "@towards": {
+    "placeholders": {
+      "headsign": {
+        "type": "String"
+      }
+    }
+  },
+  "intermediateStops": "{count, plural, =0{Ara durak yok} =1{1 ara durak} other{{count} ara durak}}",
+  "@intermediateStops": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "geometryApproximate": "Çizgi duraklar arası düz hat olarak gösteriliyor; gerçek güzergâh farklı olabilir.",
+  "origin": "Başlangıç",
+  "destination": "Varış",
+  "nearbyTitle": "Yakındaki duraklar",
+  "nearbyNeedsLocation": "Yakındaki durakları görmek için konum izni gerekir.",
+  "allowLocation": "Konum izni ver",
+  "locationDenied": "Konum izni verilmedi. Durakları arayarak da bulabilirsiniz.",
+  "locationDeniedForever": "Konum izni kapalı. Ayarlardan açabilir ya da arama kullanabilirsiniz.",
+  "openSettings": "Ayarları aç",
+  "searchInstead": "Durak ara",
+  "noNearbyStops": "Yakında durak bulunamadı.",
+  "metersAway": "{meters} m",
+  "@metersAway": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "departures": "Kalkışlar",
+  "noDepartures": "Önümüzdeki saatlerde tarifeli kalkış yok.",
+  "noScheduleForStop": "Bu durak için geçerli tarife yok. Canlı veri varsa aşağıda gösterilir.",
+  "approaching": "Yaklaşan otobüsler",
+  "stopsAway": "{count, plural, =0{Durakta} =1{1 durak uzakta} other{{count} durak uzakta}}",
+  "@stopsAway": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "liveFetchedAt": "Canlı · {time} itibarıyla",
+  "@liveFetchedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "liveUnavailable": "Canlı veri alınamadı.",
+  "liveNone": "Şu anda yaklaşan otobüs bilgisi yok.",
+  "liveExplain": "Canlı bilgi kalan durak sayısını gösterir; dakika tahmini değildir.",
+  "linesAtStop": "Bu duraktan geçen hatlar",
+  "addFavorite": "Kaydet",
+  "removeFavorite": "Kayıtlardan çıkar",
+  "linesTitle": "Hatlar",
+  "searchLinesHint": "Hat ara",
+  "modeBus": "Otobüs",
+  "modeMetro": "Metro",
+  "modeTram": "Tramvay",
+  "modeRail": "İZBAN",
+  "modeFerry": "Vapur",
+  "modeWalk": "Yürüyüş",
+  "direction": "Yön",
+  "todaySchedule": "Bugünkü seferler",
+  "stopsOnLine": "Duraklar",
+  "noLines": "Hat bulunamadı.",
+  "savedTitle": "Kaydedilenler",
+  "savedEmpty": "Henüz kayıt yok. Durak ve hat sayfalarından kaydedebilirsiniz.",
+  "favoriteStops": "Duraklar",
+  "favoriteLines": "Hatlar",
+  "stopNoLongerExists": "Bu durak güncel veride yok.",
+  "dataSources": "Veri kaynakları",
+  "dataSourcesIntro": "İzmir Go yalnızca operatörlerin yayımladığı verileri kullanır. Tahmini veya uydurma bilgi gösterilmez.",
+  "sourceIncluded": "Tarife dahil",
+  "sourceExcluded": "Tarife dahil değil",
+  "validUntil": "Geçerlilik: {date} tarihine kadar",
+  "@validUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "lastUpdated": "Son güncelleme: {time}",
+  "@lastUpdated": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "liveAvailable": "Canlı veri var",
+  "attribution": "Lisans ve atıf",
+  "notOfficial": "Bu uygulama İzmir Büyükşehir Belediyesi veya ulaşım operatörlerinin resmî uygulaması değildir.",
+  "privacy": "Gizlilik",
+  "privacyText": "Konumunuz yalnızca istek anında kullanılır ve sunucuda saklanmaz. Kayıtlarınız yalnızca bu cihazda tutulur.",
+  "clearLocalData": "Yerel verileri temizle",
+  "localDataCleared": "Yerel veriler temizlendi.",
+  "refreshData": "Veriyi yenile",
+  "offline": "Çevrimdışı",
+  "offlineBanner": "İnternet bağlantısı yok. Kaydedilmiş veriler gösteriliyor ({time}).",
+  "@offlineBanner": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "staleData": "Son güncelleme {time}",
+  "@staleData": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "retry": "Tekrar dene",
+  "loading": "Yükleniyor",
+  "errorGeneric": "Bir sorun oluştu.",
+  "errorNetwork": "Sunucuya ulaşılamıyor. Bağlantınızı kontrol edin.",
+  "errorRouting": "Rota planlama şu anda kullanılamıyor.",
+  "errorRateLimited": "Çok fazla istek gönderildi. Biraz sonra tekrar deneyin.",
+  "errorOutsideCoverage": "Konum İzmir dışında.",
+  "errorNoDataset": "Ulaşım verisi henüz hazır değil.",
+  "errorNotFound": "Bulunamadı.",
+  "transferPoint": "Aktarma noktası",
+  "noTimetableLive": "Tarife yok · canlı veri",
+  "mapLabel": "Harita",
+  "journeyMapLabel": "Yolculuk haritası",
+  "nearbyMapLabel": "Yakındaki duraklar haritası",
+  "list": "Liste",
+  "map": "Harita",
+  "selectThisPoint": "Bu noktayı seç",
+  "moveMapToSelect": "Haritayı kaydırarak noktayı seçin",
+  "selectedPoint": "Seçilen nokta",
+  "alerts": "Duyurular",
+  "firstDeparture": "İlk kalkış",
+  "approxStopTimes": "Bu hattın ara durak saatleri yaklaşıktır.",
+  "appVersion": "Sürüm {version}",
+  "@appVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "timeLabel": "Saat",
+  "now": "Şimdi",
+  "journeyRemembered": "Bu yolculuk çevrimdışı görüntülenmek üzere kaydedildi.",
+  "otherAlternatives": "Diğer seçenekler",
+  "walkAlternative": "Yürüme seçeneği",
+  "wheelchairAccessible": "Engelli erişimine uygun"
+}

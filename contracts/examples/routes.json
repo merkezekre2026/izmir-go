@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "id": "metro:FX1",
+      "line_key": "metro:FX1",
+      "short_name": "FM1",
+      "long_name": "Fixture Stadyum – Fixture Hilal",
+      "mode": "metro",
+      "color": "0038EF",
+      "text_color": "FFFFFF",
+      "source": "metro",
+      "times_approximate": false
+    },
+    {
+      "id": "tram:FXK",
+      "line_key": "tram:FXK",
+      "short_name": null,
+      "long_name": "Fixture Konak Tramvayı",
+      "mode": "tram",
+      "color": "AD1457",
+      "text_color": "FFFFFF",
+      "source": "tram",
+      "times_approximate": false
+    }
+  ],
+  "meta": {
+    "dataset": {
+      "id": 1,
+      "label": "20261024T1700Z-0443592b",
+      "published_at": "2026-10-24T17:00:43.725788Z"
+    },
+    "generated_at": "2026-10-24T17:00:43.975929Z",
+    "sources": [
+      {
+        "source": "metro",
+        "valid_from": "2026-01-01",
+        "valid_to": "2027-12-31"
+      },
+      {
+        "source": "tram",
+        "valid_from": "2026-01-01",
+        "valid_to": "2027-12-31"
+      }
+    ],
+    "notices": [
+      {
+        "code": "SOURCE_EXCLUDED",
+        "message": "ESHOT otobüs tarifeleri dahil değil: tarife geçerlilik süresi dolmuş.",
+        "source": "eshot"
+      },
+      {
+        "code": "NO_HOLIDAY_CALENDAR",
+        "message": "Resmî tatillerde sefer saatleri farklı olabilir; operatörler tatil takvimi yayımlamıyor.",
+        "source": null
+      }
+    ]
+  }
+}
