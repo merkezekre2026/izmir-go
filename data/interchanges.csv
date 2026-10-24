@@ -1,0 +1,10 @@
+from_stop_id,to_stop_id,min_transfer_time_s,straight_line_m,evidence,verified_on
+metro:6,tram:1,390,279,GTFS coords: Halkapınar <-> Halkapınar; est = 1.3x straight line / 1.2 m/s + 60 s,2026-10-24
+metro:6,izban:21,90,22,GTFS coords: Halkapınar <-> Halkapınar; est = 1.3x straight line / 1.2 m/s + 60 s,2026-10-24
+izban:21,tram:1,360,268,GTFS coords: Halkapınar <-> Halkapınar; est = 1.3x straight line / 1.2 m/s + 60 s,2026-10-24
+metro:3,tram:6,270,185,GTFS coords: Çankaya <-> Gazi Bulvarı; est = 1.3x straight line / 1.2 m/s + 60 s,2026-10-24
+metro:2,tram:7,240,166,GTFS coords: Konak <-> Konak İskele; est = 1.3x straight line / 1.2 m/s + 60 s,2026-10-24
+metro:17,tram:21,360,274,GTFS coords: Fahrettin Altay <-> Fahrettin Altay; est = 1.3x straight line / 1.2 m/s + 60 s,2026-10-24
+izban:34,tram:3,120,32,GTFS coords: Alsancak <-> Alsancak Gar; est = 1.3x straight line / 1.2 m/s + 60 s,2026-10-24
+izban:9,tram:41,150,66,GTFS coords: Çiğli <-> Semra Aksu; est = 1.3x straight line / 1.2 m/s + 60 s,2026-10-24
+metro:5,izban:35,390,285,GTFS coords: Hilal <-> Hilal; est = 1.3x straight line / 1.2 m/s + 60 s,2026-10-24

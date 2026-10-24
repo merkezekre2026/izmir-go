@@ -50,9 +50,13 @@ src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "N", "S", "C4", "SIM", "RUF", "PTH", "DTZ", "ASYNC"]
-ignore = ["S101"]  # asserts are fine in tests; production code uses explicit errors
+ignore = [
+    "S101",  # asserts are fine in tests; production code uses explicit errors
+    "E501",  # the formatter owns line length; long SQL strings stay readable
+    "N818",  # domain exception names read better without an Error suffix
+]
 # Turkish text legitimately uses dotless/dotted i.
-allowed-confusables = ["ı", "İ"]
+allowed-confusables = ["ı", "İ", "×", "–"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S", "PLR2004"]

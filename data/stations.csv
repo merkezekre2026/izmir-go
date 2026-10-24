@@ -1,0 +1,5 @@
+station_id,name,member_stop_ids,evidence
+stn:halkapinar,Halkapınar Aktarma,metro:6 tram:1 izban:21,Same name in three operator feeds; 22-279 m apart (2026-10-24)
+stn:fahrettin-altay,Fahrettin Altay Aktarma,metro:17 tram:21,Same name in metro and tram feeds; 274 m apart (2026-10-24)
+stn:hilal,Hilal Aktarma,metro:5 izban:35,Same name in metro and İZBAN feeds; 285 m apart (2026-10-24)
+stn:alsancak-gar,Alsancak Gar,izban:34 tram:3,İZBAN Alsancak and tram Alsancak Gar 32 m apart (2026-10-24)
