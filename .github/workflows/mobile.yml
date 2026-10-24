@@ -27,7 +27,10 @@ jobs:
       - run: dart run build_runner build --delete-conflicting-outputs
       - name: Generated code is committed and current
         run: git diff --exit-code -- lib
-      - run: dart format --output=none --set-exit-if-changed lib test
+      - name: Format (hand-written code only; generated files keep build_runner's formatting)
+        run: |
+          dart format --output=none --set-exit-if-changed \
+            $(git ls-files 'lib/*.dart' 'test/*.dart' | grep -vE '\.g\.dart$|\.freezed\.dart$|^lib/l10n/gen/')
       - run: flutter analyze
       - run: flutter test
 

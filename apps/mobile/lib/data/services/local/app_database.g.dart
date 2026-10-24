@@ -3,7 +3,8 @@
 part of 'app_database.dart';
 
 // ignore_for_file: type=lint
-class $CatalogStopsTable extends CatalogStops with TableInfo<$CatalogStopsTable, CatalogStopRow> {
+class $CatalogStopsTable extends CatalogStops
+    with TableInfo<$CatalogStopsTable, CatalogStopRow> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -26,7 +27,9 @@ class $CatalogStopsTable extends CatalogStops with TableInfo<$CatalogStopsTable,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _searchKeyMeta = const VerificationMeta('searchKey');
+  static const VerificationMeta _searchKeyMeta = const VerificationMeta(
+    'searchKey',
+  );
   @override
   late final GeneratedColumn<String> searchKey = GeneratedColumn<String>(
     'search_key',
@@ -71,7 +74,9 @@ class $CatalogStopsTable extends CatalogStops with TableInfo<$CatalogStopsTable,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _hasScheduleMeta = const VerificationMeta('hasSchedule');
+  static const VerificationMeta _hasScheduleMeta = const VerificationMeta(
+    'hasSchedule',
+  );
   @override
   late final GeneratedColumn<bool> hasSchedule = GeneratedColumn<bool>(
     'has_schedule',
@@ -79,9 +84,13 @@ class $CatalogStopsTable extends CatalogStops with TableInfo<$CatalogStopsTable,
     false,
     type: DriftSqlType.bool,
     requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("has_schedule" IN (0, 1))'),
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("has_schedule" IN (0, 1))',
+    ),
   );
-  static const VerificationMeta _parentStationMeta = const VerificationMeta('parentStation');
+  static const VerificationMeta _parentStationMeta = const VerificationMeta(
+    'parentStation',
+  );
   @override
   late final GeneratedColumn<String> parentStation = GeneratedColumn<String>(
     'parent_station',
@@ -131,7 +140,10 @@ class $CatalogStopsTable extends CatalogStops with TableInfo<$CatalogStopsTable,
       context.missing(_idMeta);
     }
     if (data.containsKey('name')) {
-      context.handle(_nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
@@ -144,29 +156,44 @@ class $CatalogStopsTable extends CatalogStops with TableInfo<$CatalogStopsTable,
       context.missing(_searchKeyMeta);
     }
     if (data.containsKey('lat')) {
-      context.handle(_latMeta, lat.isAcceptableOrUnknown(data['lat']!, _latMeta));
+      context.handle(
+        _latMeta,
+        lat.isAcceptableOrUnknown(data['lat']!, _latMeta),
+      );
     } else if (isInserting) {
       context.missing(_latMeta);
     }
     if (data.containsKey('lon')) {
-      context.handle(_lonMeta, lon.isAcceptableOrUnknown(data['lon']!, _lonMeta));
+      context.handle(
+        _lonMeta,
+        lon.isAcceptableOrUnknown(data['lon']!, _lonMeta),
+      );
     } else if (isInserting) {
       context.missing(_lonMeta);
     }
     if (data.containsKey('modes')) {
-      context.handle(_modesMeta, modes.isAcceptableOrUnknown(data['modes']!, _modesMeta));
+      context.handle(
+        _modesMeta,
+        modes.isAcceptableOrUnknown(data['modes']!, _modesMeta),
+      );
     } else if (isInserting) {
       context.missing(_modesMeta);
     }
     if (data.containsKey('kind')) {
-      context.handle(_kindMeta, kind.isAcceptableOrUnknown(data['kind']!, _kindMeta));
+      context.handle(
+        _kindMeta,
+        kind.isAcceptableOrUnknown(data['kind']!, _kindMeta),
+      );
     } else if (isInserting) {
       context.missing(_kindMeta);
     }
     if (data.containsKey('has_schedule')) {
       context.handle(
         _hasScheduleMeta,
-        hasSchedule.isAcceptableOrUnknown(data['has_schedule']!, _hasScheduleMeta),
+        hasSchedule.isAcceptableOrUnknown(
+          data['has_schedule']!,
+          _hasScheduleMeta,
+        ),
       );
     } else if (isInserting) {
       context.missing(_hasScheduleMeta);
@@ -174,11 +201,17 @@ class $CatalogStopsTable extends CatalogStops with TableInfo<$CatalogStopsTable,
     if (data.containsKey('parent_station')) {
       context.handle(
         _parentStationMeta,
-        parentStation.isAcceptableOrUnknown(data['parent_station']!, _parentStationMeta),
+        parentStation.isAcceptableOrUnknown(
+          data['parent_station']!,
+          _parentStationMeta,
+        ),
       );
     }
     if (data.containsKey('lines')) {
-      context.handle(_linesMeta, lines.isAcceptableOrUnknown(data['lines']!, _linesMeta));
+      context.handle(
+        _linesMeta,
+        lines.isAcceptableOrUnknown(data['lines']!, _linesMeta),
+      );
     }
     return context;
   }
@@ -189,19 +222,34 @@ class $CatalogStopsTable extends CatalogStops with TableInfo<$CatalogStopsTable,
   CatalogStopRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return CatalogStopRow(
-      id: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      name: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       searchKey: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}search_key'],
       )!,
-      lat: attachedDatabase.typeMapping.read(DriftSqlType.double, data['${effectivePrefix}lat'])!,
-      lon: attachedDatabase.typeMapping.read(DriftSqlType.double, data['${effectivePrefix}lon'])!,
+      lat: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}lat'],
+      )!,
+      lon: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}lon'],
+      )!,
       modes: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}modes'],
       )!,
-      kind: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}kind'])!,
+      kind: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}kind'],
+      )!,
       hasSchedule: attachedDatabase.typeMapping.read(
         DriftSqlType.bool,
         data['${effectivePrefix}has_schedule'],
@@ -281,7 +329,10 @@ class CatalogStopRow extends DataClass implements Insertable<CatalogStopRow> {
     );
   }
 
-  factory CatalogStopRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
+  factory CatalogStopRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return CatalogStopRow(
       id: serializer.fromJson<String>(json['id']),
@@ -333,7 +384,9 @@ class CatalogStopRow extends DataClass implements Insertable<CatalogStopRow> {
     modes: modes ?? this.modes,
     kind: kind ?? this.kind,
     hasSchedule: hasSchedule ?? this.hasSchedule,
-    parentStation: parentStation.present ? parentStation.value : this.parentStation,
+    parentStation: parentStation.present
+        ? parentStation.value
+        : this.parentStation,
     lines: lines ?? this.lines,
   );
   CatalogStopRow copyWithCompanion(CatalogStopsCompanion data) {
@@ -345,8 +398,12 @@ class CatalogStopRow extends DataClass implements Insertable<CatalogStopRow> {
       lon: data.lon.present ? data.lon.value : this.lon,
       modes: data.modes.present ? data.modes.value : this.modes,
       kind: data.kind.present ? data.kind.value : this.kind,
-      hasSchedule: data.hasSchedule.present ? data.hasSchedule.value : this.hasSchedule,
-      parentStation: data.parentStation.present ? data.parentStation.value : this.parentStation,
+      hasSchedule: data.hasSchedule.present
+          ? data.hasSchedule.value
+          : this.hasSchedule,
+      parentStation: data.parentStation.present
+          ? data.parentStation.value
+          : this.parentStation,
       lines: data.lines.present ? data.lines.value : this.lines,
     );
   }
@@ -369,8 +426,18 @@ class CatalogStopRow extends DataClass implements Insertable<CatalogStopRow> {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, name, searchKey, lat, lon, modes, kind, hasSchedule, parentStation, lines);
+  int get hashCode => Object.hash(
+    id,
+    name,
+    searchKey,
+    lat,
+    lon,
+    modes,
+    kind,
+    hasSchedule,
+    parentStation,
+    lines,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -570,7 +637,9 @@ class $CatalogRoutesTable extends CatalogRoutes
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _searchKeyMeta = const VerificationMeta('searchKey');
+  static const VerificationMeta _searchKeyMeta = const VerificationMeta(
+    'searchKey',
+  );
   @override
   late final GeneratedColumn<String> searchKey = GeneratedColumn<String>(
     'search_key',
@@ -608,7 +677,10 @@ class $CatalogRoutesTable extends CatalogRoutes
       context.missing(_idMeta);
     }
     if (data.containsKey('mode')) {
-      context.handle(_modeMeta, mode.isAcceptableOrUnknown(data['mode']!, _modeMeta));
+      context.handle(
+        _modeMeta,
+        mode.isAcceptableOrUnknown(data['mode']!, _modeMeta),
+      );
     } else if (isInserting) {
       context.missing(_modeMeta);
     }
@@ -621,7 +693,10 @@ class $CatalogRoutesTable extends CatalogRoutes
       context.missing(_searchKeyMeta);
     }
     if (data.containsKey('json')) {
-      context.handle(_jsonMeta, json.isAcceptableOrUnknown(data['json']!, _jsonMeta));
+      context.handle(
+        _jsonMeta,
+        json.isAcceptableOrUnknown(data['json']!, _jsonMeta),
+      );
     } else if (isInserting) {
       context.missing(_jsonMeta);
     }
@@ -634,13 +709,22 @@ class $CatalogRoutesTable extends CatalogRoutes
   CatalogRouteRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return CatalogRouteRow(
-      id: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      mode: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}mode'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      mode: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}mode'],
+      )!,
       searchKey: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}search_key'],
       )!,
-      json: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}json'])!,
+      json: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}json'],
+      )!,
     );
   }
 
@@ -680,7 +764,10 @@ class CatalogRouteRow extends DataClass implements Insertable<CatalogRouteRow> {
     );
   }
 
-  factory CatalogRouteRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
+  factory CatalogRouteRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return CatalogRouteRow(
       id: serializer.fromJson<String>(json['id']),
@@ -700,13 +787,17 @@ class CatalogRouteRow extends DataClass implements Insertable<CatalogRouteRow> {
     };
   }
 
-  CatalogRouteRow copyWith({String? id, String? mode, String? searchKey, String? json}) =>
-      CatalogRouteRow(
-        id: id ?? this.id,
-        mode: mode ?? this.mode,
-        searchKey: searchKey ?? this.searchKey,
-        json: json ?? this.json,
-      );
+  CatalogRouteRow copyWith({
+    String? id,
+    String? mode,
+    String? searchKey,
+    String? json,
+  }) => CatalogRouteRow(
+    id: id ?? this.id,
+    mode: mode ?? this.mode,
+    searchKey: searchKey ?? this.searchKey,
+    json: json ?? this.json,
+  );
   CatalogRouteRow copyWithCompanion(CatalogRoutesCompanion data) {
     return CatalogRouteRow(
       id: data.id.present ? data.id.value : this.id,
@@ -828,7 +919,8 @@ class CatalogRoutesCompanion extends UpdateCompanion<CatalogRouteRow> {
   }
 }
 
-class $KeyValuesTable extends KeyValues with TableInfo<$KeyValuesTable, KeyValueRow> {
+class $KeyValuesTable extends KeyValues
+    with TableInfo<$KeyValuesTable, KeyValueRow> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -866,12 +958,18 @@ class $KeyValuesTable extends KeyValues with TableInfo<$KeyValuesTable, KeyValue
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('key')) {
-      context.handle(_keyMeta, key.isAcceptableOrUnknown(data['key']!, _keyMeta));
+      context.handle(
+        _keyMeta,
+        key.isAcceptableOrUnknown(data['key']!, _keyMeta),
+      );
     } else if (isInserting) {
       context.missing(_keyMeta);
     }
     if (data.containsKey('value')) {
-      context.handle(_valueMeta, value.isAcceptableOrUnknown(data['value']!, _valueMeta));
+      context.handle(
+        _valueMeta,
+        value.isAcceptableOrUnknown(data['value']!, _valueMeta),
+      );
     } else if (isInserting) {
       context.missing(_valueMeta);
     }
@@ -884,7 +982,10 @@ class $KeyValuesTable extends KeyValues with TableInfo<$KeyValuesTable, KeyValue
   KeyValueRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return KeyValueRow(
-      key: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}key'])!,
+      key: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}key'],
+      )!,
       value: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}value'],
@@ -914,7 +1015,10 @@ class KeyValueRow extends DataClass implements Insertable<KeyValueRow> {
     return KeyValuesCompanion(key: Value(key), value: Value(value));
   }
 
-  factory KeyValueRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
+  factory KeyValueRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return KeyValueRow(
       key: serializer.fromJson<String>(json['key']),
@@ -953,7 +1057,9 @@ class KeyValueRow extends DataClass implements Insertable<KeyValueRow> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is KeyValueRow && other.key == this.key && other.value == this.value);
+      (other is KeyValueRow &&
+          other.key == this.key &&
+          other.value == this.value);
 }
 
 class KeyValuesCompanion extends UpdateCompanion<KeyValueRow> {
@@ -983,7 +1089,11 @@ class KeyValuesCompanion extends UpdateCompanion<KeyValueRow> {
     });
   }
 
-  KeyValuesCompanion copyWith({Value<String>? key, Value<String>? value, Value<int>? rowid}) {
+  KeyValuesCompanion copyWith({
+    Value<String>? key,
+    Value<String>? value,
+    Value<int>? rowid,
+  }) {
     return KeyValuesCompanion(
       key: key ?? this.key,
       value: value ?? this.value,
@@ -1050,7 +1160,9 @@ class $FavoriteStopsTable extends FavoriteStops
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _addedAtMeta = const VerificationMeta('addedAt');
+  static const VerificationMeta _addedAtMeta = const VerificationMeta(
+    'addedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> addedAt = GeneratedColumn<DateTime>(
     'added_at',
@@ -1074,22 +1186,34 @@ class $FavoriteStopsTable extends FavoriteStops
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('stop_id')) {
-      context.handle(_stopIdMeta, stopId.isAcceptableOrUnknown(data['stop_id']!, _stopIdMeta));
+      context.handle(
+        _stopIdMeta,
+        stopId.isAcceptableOrUnknown(data['stop_id']!, _stopIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_stopIdMeta);
     }
     if (data.containsKey('name')) {
-      context.handle(_nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('modes')) {
-      context.handle(_modesMeta, modes.isAcceptableOrUnknown(data['modes']!, _modesMeta));
+      context.handle(
+        _modesMeta,
+        modes.isAcceptableOrUnknown(data['modes']!, _modesMeta),
+      );
     } else if (isInserting) {
       context.missing(_modesMeta);
     }
     if (data.containsKey('added_at')) {
-      context.handle(_addedAtMeta, addedAt.isAcceptableOrUnknown(data['added_at']!, _addedAtMeta));
+      context.handle(
+        _addedAtMeta,
+        addedAt.isAcceptableOrUnknown(data['added_at']!, _addedAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_addedAtMeta);
     }
@@ -1106,7 +1230,10 @@ class $FavoriteStopsTable extends FavoriteStops
         DriftSqlType.string,
         data['${effectivePrefix}stop_id'],
       )!,
-      name: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       modes: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}modes'],
@@ -1154,7 +1281,10 @@ class FavoriteStopRow extends DataClass implements Insertable<FavoriteStopRow> {
     );
   }
 
-  factory FavoriteStopRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
+  factory FavoriteStopRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return FavoriteStopRow(
       stopId: serializer.fromJson<String>(json['stopId']),
@@ -1174,13 +1304,17 @@ class FavoriteStopRow extends DataClass implements Insertable<FavoriteStopRow> {
     };
   }
 
-  FavoriteStopRow copyWith({String? stopId, String? name, String? modes, DateTime? addedAt}) =>
-      FavoriteStopRow(
-        stopId: stopId ?? this.stopId,
-        name: name ?? this.name,
-        modes: modes ?? this.modes,
-        addedAt: addedAt ?? this.addedAt,
-      );
+  FavoriteStopRow copyWith({
+    String? stopId,
+    String? name,
+    String? modes,
+    DateTime? addedAt,
+  }) => FavoriteStopRow(
+    stopId: stopId ?? this.stopId,
+    name: name ?? this.name,
+    modes: modes ?? this.modes,
+    addedAt: addedAt ?? this.addedAt,
+  );
   FavoriteStopRow copyWithCompanion(FavoriteStopsCompanion data) {
     return FavoriteStopRow(
       stopId: data.stopId.present ? data.stopId.value : this.stopId,
@@ -1308,7 +1442,9 @@ class $FavoriteLinesTable extends FavoriteLines
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   $FavoriteLinesTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _routeIdMeta = const VerificationMeta('routeId');
+  static const VerificationMeta _routeIdMeta = const VerificationMeta(
+    'routeId',
+  );
   @override
   late final GeneratedColumn<String> routeId = GeneratedColumn<String>(
     'route_id',
@@ -1326,7 +1462,9 @@ class $FavoriteLinesTable extends FavoriteLines
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _addedAtMeta = const VerificationMeta('addedAt');
+  static const VerificationMeta _addedAtMeta = const VerificationMeta(
+    'addedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> addedAt = GeneratedColumn<DateTime>(
     'added_at',
@@ -1350,17 +1488,26 @@ class $FavoriteLinesTable extends FavoriteLines
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('route_id')) {
-      context.handle(_routeIdMeta, routeId.isAcceptableOrUnknown(data['route_id']!, _routeIdMeta));
+      context.handle(
+        _routeIdMeta,
+        routeId.isAcceptableOrUnknown(data['route_id']!, _routeIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_routeIdMeta);
     }
     if (data.containsKey('json')) {
-      context.handle(_jsonMeta, json.isAcceptableOrUnknown(data['json']!, _jsonMeta));
+      context.handle(
+        _jsonMeta,
+        json.isAcceptableOrUnknown(data['json']!, _jsonMeta),
+      );
     } else if (isInserting) {
       context.missing(_jsonMeta);
     }
     if (data.containsKey('added_at')) {
-      context.handle(_addedAtMeta, addedAt.isAcceptableOrUnknown(data['added_at']!, _addedAtMeta));
+      context.handle(
+        _addedAtMeta,
+        addedAt.isAcceptableOrUnknown(data['added_at']!, _addedAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_addedAtMeta);
     }
@@ -1377,7 +1524,10 @@ class $FavoriteLinesTable extends FavoriteLines
         DriftSqlType.string,
         data['${effectivePrefix}route_id'],
       )!,
-      json: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}json'])!,
+      json: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}json'],
+      )!,
       addedAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}added_at'],
@@ -1395,7 +1545,11 @@ class FavoriteLineRow extends DataClass implements Insertable<FavoriteLineRow> {
   final String routeId;
   final String json;
   final DateTime addedAt;
-  const FavoriteLineRow({required this.routeId, required this.json, required this.addedAt});
+  const FavoriteLineRow({
+    required this.routeId,
+    required this.json,
+    required this.addedAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1413,7 +1567,10 @@ class FavoriteLineRow extends DataClass implements Insertable<FavoriteLineRow> {
     );
   }
 
-  factory FavoriteLineRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
+  factory FavoriteLineRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return FavoriteLineRow(
       routeId: serializer.fromJson<String>(json['routeId']),
@@ -1431,7 +1588,11 @@ class FavoriteLineRow extends DataClass implements Insertable<FavoriteLineRow> {
     };
   }
 
-  FavoriteLineRow copyWith({String? routeId, String? json, DateTime? addedAt}) => FavoriteLineRow(
+  FavoriteLineRow copyWith({
+    String? routeId,
+    String? json,
+    DateTime? addedAt,
+  }) => FavoriteLineRow(
     routeId: routeId ?? this.routeId,
     json: json ?? this.json,
     addedAt: addedAt ?? this.addedAt,
@@ -1542,12 +1703,15 @@ class FavoriteLinesCompanion extends UpdateCompanion<FavoriteLineRow> {
   }
 }
 
-class $RecentPlacesTable extends RecentPlaces with TableInfo<$RecentPlacesTable, RecentPlaceRow> {
+class $RecentPlacesTable extends RecentPlaces
+    with TableInfo<$RecentPlacesTable, RecentPlaceRow> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   $RecentPlacesTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _placeIdMeta = const VerificationMeta('placeId');
+  static const VerificationMeta _placeIdMeta = const VerificationMeta(
+    'placeId',
+  );
   @override
   late final GeneratedColumn<String> placeId = GeneratedColumn<String>(
     'place_id',
@@ -1589,17 +1753,26 @@ class $RecentPlacesTable extends RecentPlaces with TableInfo<$RecentPlacesTable,
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('place_id')) {
-      context.handle(_placeIdMeta, placeId.isAcceptableOrUnknown(data['place_id']!, _placeIdMeta));
+      context.handle(
+        _placeIdMeta,
+        placeId.isAcceptableOrUnknown(data['place_id']!, _placeIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_placeIdMeta);
     }
     if (data.containsKey('json')) {
-      context.handle(_jsonMeta, json.isAcceptableOrUnknown(data['json']!, _jsonMeta));
+      context.handle(
+        _jsonMeta,
+        json.isAcceptableOrUnknown(data['json']!, _jsonMeta),
+      );
     } else if (isInserting) {
       context.missing(_jsonMeta);
     }
     if (data.containsKey('used_at')) {
-      context.handle(_usedAtMeta, usedAt.isAcceptableOrUnknown(data['used_at']!, _usedAtMeta));
+      context.handle(
+        _usedAtMeta,
+        usedAt.isAcceptableOrUnknown(data['used_at']!, _usedAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_usedAtMeta);
     }
@@ -1616,7 +1789,10 @@ class $RecentPlacesTable extends RecentPlaces with TableInfo<$RecentPlacesTable,
         DriftSqlType.string,
         data['${effectivePrefix}place_id'],
       )!,
-      json: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}json'])!,
+      json: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}json'],
+      )!,
       usedAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}used_at'],
@@ -1634,7 +1810,11 @@ class RecentPlaceRow extends DataClass implements Insertable<RecentPlaceRow> {
   final String placeId;
   final String json;
   final DateTime usedAt;
-  const RecentPlaceRow({required this.placeId, required this.json, required this.usedAt});
+  const RecentPlaceRow({
+    required this.placeId,
+    required this.json,
+    required this.usedAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1645,10 +1825,17 @@ class RecentPlaceRow extends DataClass implements Insertable<RecentPlaceRow> {
   }
 
   RecentPlacesCompanion toCompanion(bool nullToAbsent) {
-    return RecentPlacesCompanion(placeId: Value(placeId), json: Value(json), usedAt: Value(usedAt));
+    return RecentPlacesCompanion(
+      placeId: Value(placeId),
+      json: Value(json),
+      usedAt: Value(usedAt),
+    );
   }
 
-  factory RecentPlaceRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
+  factory RecentPlaceRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return RecentPlaceRow(
       placeId: serializer.fromJson<String>(json['placeId']),
@@ -1666,11 +1853,12 @@ class RecentPlaceRow extends DataClass implements Insertable<RecentPlaceRow> {
     };
   }
 
-  RecentPlaceRow copyWith({String? placeId, String? json, DateTime? usedAt}) => RecentPlaceRow(
-    placeId: placeId ?? this.placeId,
-    json: json ?? this.json,
-    usedAt: usedAt ?? this.usedAt,
-  );
+  RecentPlaceRow copyWith({String? placeId, String? json, DateTime? usedAt}) =>
+      RecentPlaceRow(
+        placeId: placeId ?? this.placeId,
+        json: json ?? this.json,
+        usedAt: usedAt ?? this.usedAt,
+      );
   RecentPlaceRow copyWithCompanion(RecentPlacesCompanion data) {
     return RecentPlaceRow(
       placeId: data.placeId.present ? data.placeId.value : this.placeId,
@@ -1801,7 +1989,9 @@ class $CachedResponsesTable extends CachedResponses
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _fetchedAtMeta = const VerificationMeta('fetchedAt');
+  static const VerificationMeta _fetchedAtMeta = const VerificationMeta(
+    'fetchedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> fetchedAt = GeneratedColumn<DateTime>(
     'fetched_at',
@@ -1810,7 +2000,9 @@ class $CachedResponsesTable extends CachedResponses
     type: DriftSqlType.dateTime,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _expiresAtMeta = const VerificationMeta('expiresAt');
+  static const VerificationMeta _expiresAtMeta = const VerificationMeta(
+    'expiresAt',
+  );
   @override
   late final GeneratedColumn<DateTime> expiresAt = GeneratedColumn<DateTime>(
     'expires_at',
@@ -1834,12 +2026,18 @@ class $CachedResponsesTable extends CachedResponses
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('key')) {
-      context.handle(_keyMeta, key.isAcceptableOrUnknown(data['key']!, _keyMeta));
+      context.handle(
+        _keyMeta,
+        key.isAcceptableOrUnknown(data['key']!, _keyMeta),
+      );
     } else if (isInserting) {
       context.missing(_keyMeta);
     }
     if (data.containsKey('json')) {
-      context.handle(_jsonMeta, json.isAcceptableOrUnknown(data['json']!, _jsonMeta));
+      context.handle(
+        _jsonMeta,
+        json.isAcceptableOrUnknown(data['json']!, _jsonMeta),
+      );
     } else if (isInserting) {
       context.missing(_jsonMeta);
     }
@@ -1866,8 +2064,14 @@ class $CachedResponsesTable extends CachedResponses
   CachedResponseRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return CachedResponseRow(
-      key: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}key'])!,
-      json: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}json'])!,
+      key: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}key'],
+      )!,
+      json: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}json'],
+      )!,
       fetchedAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}fetched_at'],
@@ -1885,7 +2089,8 @@ class $CachedResponsesTable extends CachedResponses
   }
 }
 
-class CachedResponseRow extends DataClass implements Insertable<CachedResponseRow> {
+class CachedResponseRow extends DataClass
+    implements Insertable<CachedResponseRow> {
   final String key;
   final String json;
   final DateTime fetchedAt;
@@ -1913,11 +2118,16 @@ class CachedResponseRow extends DataClass implements Insertable<CachedResponseRo
       key: Value(key),
       json: Value(json),
       fetchedAt: Value(fetchedAt),
-      expiresAt: expiresAt == null && nullToAbsent ? const Value.absent() : Value(expiresAt),
+      expiresAt: expiresAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(expiresAt),
     );
   }
 
-  factory CachedResponseRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
+  factory CachedResponseRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return CachedResponseRow(
       key: serializer.fromJson<String>(json['key']),
@@ -2077,7 +2287,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $FavoriteStopsTable favoriteStops = $FavoriteStopsTable(this);
   late final $FavoriteLinesTable favoriteLines = $FavoriteLinesTable(this);
   late final $RecentPlacesTable recentPlaces = $RecentPlacesTable(this);
-  late final $CachedResponsesTable cachedResponses = $CachedResponsesTable(this);
+  late final $CachedResponsesTable cachedResponses = $CachedResponsesTable(
+    this,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2093,34 +2305,37 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   ];
 }
 
-typedef $$CatalogStopsTableCreateCompanionBuilder = CatalogStopsCompanion Function({
-  required String id,
-  required String name,
-  required String searchKey,
-  required double lat,
-  required double lon,
-  required String modes,
-  required String kind,
-  required bool hasSchedule,
-  Value<String?> parentStation,
-  Value<String> lines,
-  Value<int> rowid,
-});
-typedef $$CatalogStopsTableUpdateCompanionBuilder = CatalogStopsCompanion Function({
-  Value<String> id,
-  Value<String> name,
-  Value<String> searchKey,
-  Value<double> lat,
-  Value<double> lon,
-  Value<String> modes,
-  Value<String> kind,
-  Value<bool> hasSchedule,
-  Value<String?> parentStation,
-  Value<String> lines,
-  Value<int> rowid,
-});
+typedef $$CatalogStopsTableCreateCompanionBuilder =
+    CatalogStopsCompanion Function({
+      required String id,
+      required String name,
+      required String searchKey,
+      required double lat,
+      required double lon,
+      required String modes,
+      required String kind,
+      required bool hasSchedule,
+      Value<String?> parentStation,
+      Value<String> lines,
+      Value<int> rowid,
+    });
+typedef $$CatalogStopsTableUpdateCompanionBuilder =
+    CatalogStopsCompanion Function({
+      Value<String> id,
+      Value<String> name,
+      Value<String> searchKey,
+      Value<double> lat,
+      Value<double> lon,
+      Value<String> modes,
+      Value<String> kind,
+      Value<bool> hasSchedule,
+      Value<String?> parentStation,
+      Value<String> lines,
+      Value<int> rowid,
+    });
 
-class $$CatalogStopsTableFilterComposer extends Composer<_$AppDatabase, $CatalogStopsTable> {
+class $$CatalogStopsTableFilterComposer
+    extends Composer<_$AppDatabase, $CatalogStopsTable> {
   $$CatalogStopsTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -2128,38 +2343,59 @@ class $$CatalogStopsTableFilterComposer extends Composer<_$AppDatabase, $Catalog
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get name =>
-      $composableBuilder(column: $table.name, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get searchKey =>
-      $composableBuilder(column: $table.searchKey, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get searchKey => $composableBuilder(
+    column: $table.searchKey,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<double> get lat =>
-      $composableBuilder(column: $table.lat, builder: (column) => ColumnFilters(column));
+  ColumnFilters<double> get lat => $composableBuilder(
+    column: $table.lat,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<double> get lon =>
-      $composableBuilder(column: $table.lon, builder: (column) => ColumnFilters(column));
+  ColumnFilters<double> get lon => $composableBuilder(
+    column: $table.lon,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get modes =>
-      $composableBuilder(column: $table.modes, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get modes => $composableBuilder(
+    column: $table.modes,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get kind =>
-      $composableBuilder(column: $table.kind, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get kind => $composableBuilder(
+    column: $table.kind,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<bool> get hasSchedule =>
-      $composableBuilder(column: $table.hasSchedule, builder: (column) => ColumnFilters(column));
+  ColumnFilters<bool> get hasSchedule => $composableBuilder(
+    column: $table.hasSchedule,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get parentStation =>
-      $composableBuilder(column: $table.parentStation, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get parentStation => $composableBuilder(
+    column: $table.parentStation,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get lines =>
-      $composableBuilder(column: $table.lines, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get lines => $composableBuilder(
+    column: $table.lines,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
-class $$CatalogStopsTableOrderingComposer extends Composer<_$AppDatabase, $CatalogStopsTable> {
+class $$CatalogStopsTableOrderingComposer
+    extends Composer<_$AppDatabase, $CatalogStopsTable> {
   $$CatalogStopsTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -2167,40 +2403,59 @@ class $$CatalogStopsTableOrderingComposer extends Composer<_$AppDatabase, $Catal
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get name =>
-      $composableBuilder(column: $table.name, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get searchKey =>
-      $composableBuilder(column: $table.searchKey, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get searchKey => $composableBuilder(
+    column: $table.searchKey,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<double> get lat =>
-      $composableBuilder(column: $table.lat, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<double> get lat => $composableBuilder(
+    column: $table.lat,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<double> get lon =>
-      $composableBuilder(column: $table.lon, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<double> get lon => $composableBuilder(
+    column: $table.lon,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get modes =>
-      $composableBuilder(column: $table.modes, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get modes => $composableBuilder(
+    column: $table.modes,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get kind =>
-      $composableBuilder(column: $table.kind, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get kind => $composableBuilder(
+    column: $table.kind,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<bool> get hasSchedule =>
-      $composableBuilder(column: $table.hasSchedule, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<bool> get hasSchedule => $composableBuilder(
+    column: $table.hasSchedule,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get parentStation => $composableBuilder(
     column: $table.parentStation,
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get lines =>
-      $composableBuilder(column: $table.lines, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get lines => $composableBuilder(
+    column: $table.lines,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
-class $$CatalogStopsTableAnnotationComposer extends Composer<_$AppDatabase, $CatalogStopsTable> {
+class $$CatalogStopsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $CatalogStopsTable> {
   $$CatalogStopsTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -2229,11 +2484,15 @@ class $$CatalogStopsTableAnnotationComposer extends Composer<_$AppDatabase, $Cat
   GeneratedColumn<String> get kind =>
       $composableBuilder(column: $table.kind, builder: (column) => column);
 
-  GeneratedColumn<bool> get hasSchedule =>
-      $composableBuilder(column: $table.hasSchedule, builder: (column) => column);
+  GeneratedColumn<bool> get hasSchedule => $composableBuilder(
+    column: $table.hasSchedule,
+    builder: (column) => column,
+  );
 
-  GeneratedColumn<String> get parentStation =>
-      $composableBuilder(column: $table.parentStation, builder: (column) => column);
+  GeneratedColumn<String> get parentStation => $composableBuilder(
+    column: $table.parentStation,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get lines =>
       $composableBuilder(column: $table.lines, builder: (column) => column);
@@ -2250,7 +2509,10 @@ class $$CatalogStopsTableTableManager
           $$CatalogStopsTableAnnotationComposer,
           $$CatalogStopsTableCreateCompanionBuilder,
           $$CatalogStopsTableUpdateCompanionBuilder,
-          (CatalogStopRow, BaseReferences<_$AppDatabase, $CatalogStopsTable, CatalogStopRow>),
+          (
+            CatalogStopRow,
+            BaseReferences<_$AppDatabase, $CatalogStopsTable, CatalogStopRow>,
+          ),
           CatalogStopRow,
           PrefetchHooks Function()
         > {
@@ -2259,8 +2521,10 @@ class $$CatalogStopsTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () => $$CatalogStopsTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () => $$CatalogStopsTableOrderingComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$CatalogStopsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$CatalogStopsTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$CatalogStopsTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
@@ -2319,7 +2583,11 @@ class $$CatalogStopsTableTableManager
               .map(
                 (e) => (
                   e.readTable<$CatalogStopsTable, CatalogStopRow>(table),
-                  BaseReferences<_$AppDatabase, $CatalogStopsTable, CatalogStopRow>(db, table, e),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $CatalogStopsTable,
+                    CatalogStopRow
+                  >(db, table, e),
                 ),
               )
               .toList(),
@@ -2338,26 +2606,32 @@ typedef $$CatalogStopsTableProcessedTableManager =
       $$CatalogStopsTableAnnotationComposer,
       $$CatalogStopsTableCreateCompanionBuilder,
       $$CatalogStopsTableUpdateCompanionBuilder,
-      (CatalogStopRow, BaseReferences<_$AppDatabase, $CatalogStopsTable, CatalogStopRow>),
+      (
+        CatalogStopRow,
+        BaseReferences<_$AppDatabase, $CatalogStopsTable, CatalogStopRow>,
+      ),
       CatalogStopRow,
       PrefetchHooks Function()
     >;
-typedef $$CatalogRoutesTableCreateCompanionBuilder = CatalogRoutesCompanion Function({
-  required String id,
-  required String mode,
-  required String searchKey,
-  required String json,
-  Value<int> rowid,
-});
-typedef $$CatalogRoutesTableUpdateCompanionBuilder = CatalogRoutesCompanion Function({
-  Value<String> id,
-  Value<String> mode,
-  Value<String> searchKey,
-  Value<String> json,
-  Value<int> rowid,
-});
+typedef $$CatalogRoutesTableCreateCompanionBuilder =
+    CatalogRoutesCompanion Function({
+      required String id,
+      required String mode,
+      required String searchKey,
+      required String json,
+      Value<int> rowid,
+    });
+typedef $$CatalogRoutesTableUpdateCompanionBuilder =
+    CatalogRoutesCompanion Function({
+      Value<String> id,
+      Value<String> mode,
+      Value<String> searchKey,
+      Value<String> json,
+      Value<int> rowid,
+    });
 
-class $$CatalogRoutesTableFilterComposer extends Composer<_$AppDatabase, $CatalogRoutesTable> {
+class $$CatalogRoutesTableFilterComposer
+    extends Composer<_$AppDatabase, $CatalogRoutesTable> {
   $$CatalogRoutesTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -2365,20 +2639,29 @@ class $$CatalogRoutesTableFilterComposer extends Composer<_$AppDatabase, $Catalo
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get mode =>
-      $composableBuilder(column: $table.mode, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get mode => $composableBuilder(
+    column: $table.mode,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get searchKey =>
-      $composableBuilder(column: $table.searchKey, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get searchKey => $composableBuilder(
+    column: $table.searchKey,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get json =>
-      $composableBuilder(column: $table.json, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
-class $$CatalogRoutesTableOrderingComposer extends Composer<_$AppDatabase, $CatalogRoutesTable> {
+class $$CatalogRoutesTableOrderingComposer
+    extends Composer<_$AppDatabase, $CatalogRoutesTable> {
   $$CatalogRoutesTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -2386,20 +2669,29 @@ class $$CatalogRoutesTableOrderingComposer extends Composer<_$AppDatabase, $Cata
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get id =>
-      $composableBuilder(column: $table.id, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get mode =>
-      $composableBuilder(column: $table.mode, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get mode => $composableBuilder(
+    column: $table.mode,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get searchKey =>
-      $composableBuilder(column: $table.searchKey, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get searchKey => $composableBuilder(
+    column: $table.searchKey,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get json =>
-      $composableBuilder(column: $table.json, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
-class $$CatalogRoutesTableAnnotationComposer extends Composer<_$AppDatabase, $CatalogRoutesTable> {
+class $$CatalogRoutesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $CatalogRoutesTable> {
   $$CatalogRoutesTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -2431,7 +2723,10 @@ class $$CatalogRoutesTableTableManager
           $$CatalogRoutesTableAnnotationComposer,
           $$CatalogRoutesTableCreateCompanionBuilder,
           $$CatalogRoutesTableUpdateCompanionBuilder,
-          (CatalogRouteRow, BaseReferences<_$AppDatabase, $CatalogRoutesTable, CatalogRouteRow>),
+          (
+            CatalogRouteRow,
+            BaseReferences<_$AppDatabase, $CatalogRoutesTable, CatalogRouteRow>,
+          ),
           CatalogRouteRow,
           PrefetchHooks Function()
         > {
@@ -2440,7 +2735,8 @@ class $$CatalogRoutesTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () => $$CatalogRoutesTableFilterComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$CatalogRoutesTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
               $$CatalogRoutesTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
@@ -2477,7 +2773,11 @@ class $$CatalogRoutesTableTableManager
               .map(
                 (e) => (
                   e.readTable<$CatalogRoutesTable, CatalogRouteRow>(table),
-                  BaseReferences<_$AppDatabase, $CatalogRoutesTable, CatalogRouteRow>(db, table, e),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $CatalogRoutesTable,
+                    CatalogRouteRow
+                  >(db, table, e),
                 ),
               )
               .toList(),
@@ -2496,7 +2796,10 @@ typedef $$CatalogRoutesTableProcessedTableManager =
       $$CatalogRoutesTableAnnotationComposer,
       $$CatalogRoutesTableCreateCompanionBuilder,
       $$CatalogRoutesTableUpdateCompanionBuilder,
-      (CatalogRouteRow, BaseReferences<_$AppDatabase, $CatalogRoutesTable, CatalogRouteRow>),
+      (
+        CatalogRouteRow,
+        BaseReferences<_$AppDatabase, $CatalogRoutesTable, CatalogRouteRow>,
+      ),
       CatalogRouteRow,
       PrefetchHooks Function()
     >;
@@ -2511,7 +2814,8 @@ typedef $$KeyValuesTableUpdateCompanionBuilder = KeyValuesCompanion Function({
   Value<int> rowid,
 });
 
-class $$KeyValuesTableFilterComposer extends Composer<_$AppDatabase, $KeyValuesTable> {
+class $$KeyValuesTableFilterComposer
+    extends Composer<_$AppDatabase, $KeyValuesTable> {
   $$KeyValuesTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -2519,14 +2823,19 @@ class $$KeyValuesTableFilterComposer extends Composer<_$AppDatabase, $KeyValuesT
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get key =>
-      $composableBuilder(column: $table.key, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get value =>
-      $composableBuilder(column: $table.value, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get value => $composableBuilder(
+    column: $table.value,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
-class $$KeyValuesTableOrderingComposer extends Composer<_$AppDatabase, $KeyValuesTable> {
+class $$KeyValuesTableOrderingComposer
+    extends Composer<_$AppDatabase, $KeyValuesTable> {
   $$KeyValuesTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -2534,14 +2843,19 @@ class $$KeyValuesTableOrderingComposer extends Composer<_$AppDatabase, $KeyValue
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get key =>
-      $composableBuilder(column: $table.key, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get value =>
-      $composableBuilder(column: $table.value, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get value => $composableBuilder(
+    column: $table.value,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
-class $$KeyValuesTableAnnotationComposer extends Composer<_$AppDatabase, $KeyValuesTable> {
+class $$KeyValuesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $KeyValuesTable> {
   $$KeyValuesTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -2567,7 +2881,10 @@ class $$KeyValuesTableTableManager
           $$KeyValuesTableAnnotationComposer,
           $$KeyValuesTableCreateCompanionBuilder,
           $$KeyValuesTableUpdateCompanionBuilder,
-          (KeyValueRow, BaseReferences<_$AppDatabase, $KeyValuesTable, KeyValueRow>),
+          (
+            KeyValueRow,
+            BaseReferences<_$AppDatabase, $KeyValuesTable, KeyValueRow>,
+          ),
           KeyValueRow,
           PrefetchHooks Function()
         > {
@@ -2576,8 +2893,10 @@ class $$KeyValuesTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () => $$KeyValuesTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () => $$KeyValuesTableOrderingComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$KeyValuesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$KeyValuesTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$KeyValuesTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
@@ -2594,7 +2913,11 @@ class $$KeyValuesTableTableManager
               .map(
                 (e) => (
                   e.readTable<$KeyValuesTable, KeyValueRow>(table),
-                  BaseReferences<_$AppDatabase, $KeyValuesTable, KeyValueRow>(db, table, e),
+                  BaseReferences<_$AppDatabase, $KeyValuesTable, KeyValueRow>(
+                    db,
+                    table,
+                    e,
+                  ),
                 ),
               )
               .toList(),
@@ -2613,26 +2936,32 @@ typedef $$KeyValuesTableProcessedTableManager =
       $$KeyValuesTableAnnotationComposer,
       $$KeyValuesTableCreateCompanionBuilder,
       $$KeyValuesTableUpdateCompanionBuilder,
-      (KeyValueRow, BaseReferences<_$AppDatabase, $KeyValuesTable, KeyValueRow>),
+      (
+        KeyValueRow,
+        BaseReferences<_$AppDatabase, $KeyValuesTable, KeyValueRow>,
+      ),
       KeyValueRow,
       PrefetchHooks Function()
     >;
-typedef $$FavoriteStopsTableCreateCompanionBuilder = FavoriteStopsCompanion Function({
-  required String stopId,
-  required String name,
-  required String modes,
-  required DateTime addedAt,
-  Value<int> rowid,
-});
-typedef $$FavoriteStopsTableUpdateCompanionBuilder = FavoriteStopsCompanion Function({
-  Value<String> stopId,
-  Value<String> name,
-  Value<String> modes,
-  Value<DateTime> addedAt,
-  Value<int> rowid,
-});
+typedef $$FavoriteStopsTableCreateCompanionBuilder =
+    FavoriteStopsCompanion Function({
+      required String stopId,
+      required String name,
+      required String modes,
+      required DateTime addedAt,
+      Value<int> rowid,
+    });
+typedef $$FavoriteStopsTableUpdateCompanionBuilder =
+    FavoriteStopsCompanion Function({
+      Value<String> stopId,
+      Value<String> name,
+      Value<String> modes,
+      Value<DateTime> addedAt,
+      Value<int> rowid,
+    });
 
-class $$FavoriteStopsTableFilterComposer extends Composer<_$AppDatabase, $FavoriteStopsTable> {
+class $$FavoriteStopsTableFilterComposer
+    extends Composer<_$AppDatabase, $FavoriteStopsTable> {
   $$FavoriteStopsTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -2640,20 +2969,29 @@ class $$FavoriteStopsTableFilterComposer extends Composer<_$AppDatabase, $Favori
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get stopId =>
-      $composableBuilder(column: $table.stopId, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get stopId => $composableBuilder(
+    column: $table.stopId,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get name =>
-      $composableBuilder(column: $table.name, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get modes =>
-      $composableBuilder(column: $table.modes, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get modes => $composableBuilder(
+    column: $table.modes,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get addedAt =>
-      $composableBuilder(column: $table.addedAt, builder: (column) => ColumnFilters(column));
+  ColumnFilters<DateTime> get addedAt => $composableBuilder(
+    column: $table.addedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
-class $$FavoriteStopsTableOrderingComposer extends Composer<_$AppDatabase, $FavoriteStopsTable> {
+class $$FavoriteStopsTableOrderingComposer
+    extends Composer<_$AppDatabase, $FavoriteStopsTable> {
   $$FavoriteStopsTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -2661,20 +2999,29 @@ class $$FavoriteStopsTableOrderingComposer extends Composer<_$AppDatabase, $Favo
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get stopId =>
-      $composableBuilder(column: $table.stopId, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get stopId => $composableBuilder(
+    column: $table.stopId,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get name =>
-      $composableBuilder(column: $table.name, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get modes =>
-      $composableBuilder(column: $table.modes, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get modes => $composableBuilder(
+    column: $table.modes,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get addedAt =>
-      $composableBuilder(column: $table.addedAt, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<DateTime> get addedAt => $composableBuilder(
+    column: $table.addedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
-class $$FavoriteStopsTableAnnotationComposer extends Composer<_$AppDatabase, $FavoriteStopsTable> {
+class $$FavoriteStopsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $FavoriteStopsTable> {
   $$FavoriteStopsTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -2706,7 +3053,10 @@ class $$FavoriteStopsTableTableManager
           $$FavoriteStopsTableAnnotationComposer,
           $$FavoriteStopsTableCreateCompanionBuilder,
           $$FavoriteStopsTableUpdateCompanionBuilder,
-          (FavoriteStopRow, BaseReferences<_$AppDatabase, $FavoriteStopsTable, FavoriteStopRow>),
+          (
+            FavoriteStopRow,
+            BaseReferences<_$AppDatabase, $FavoriteStopsTable, FavoriteStopRow>,
+          ),
           FavoriteStopRow,
           PrefetchHooks Function()
         > {
@@ -2715,7 +3065,8 @@ class $$FavoriteStopsTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () => $$FavoriteStopsTableFilterComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$FavoriteStopsTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
               $$FavoriteStopsTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
@@ -2752,7 +3103,11 @@ class $$FavoriteStopsTableTableManager
               .map(
                 (e) => (
                   e.readTable<$FavoriteStopsTable, FavoriteStopRow>(table),
-                  BaseReferences<_$AppDatabase, $FavoriteStopsTable, FavoriteStopRow>(db, table, e),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $FavoriteStopsTable,
+                    FavoriteStopRow
+                  >(db, table, e),
                 ),
               )
               .toList(),
@@ -2771,24 +3126,30 @@ typedef $$FavoriteStopsTableProcessedTableManager =
       $$FavoriteStopsTableAnnotationComposer,
       $$FavoriteStopsTableCreateCompanionBuilder,
       $$FavoriteStopsTableUpdateCompanionBuilder,
-      (FavoriteStopRow, BaseReferences<_$AppDatabase, $FavoriteStopsTable, FavoriteStopRow>),
+      (
+        FavoriteStopRow,
+        BaseReferences<_$AppDatabase, $FavoriteStopsTable, FavoriteStopRow>,
+      ),
       FavoriteStopRow,
       PrefetchHooks Function()
     >;
-typedef $$FavoriteLinesTableCreateCompanionBuilder = FavoriteLinesCompanion Function({
-  required String routeId,
-  required String json,
-  required DateTime addedAt,
-  Value<int> rowid,
-});
-typedef $$FavoriteLinesTableUpdateCompanionBuilder = FavoriteLinesCompanion Function({
-  Value<String> routeId,
-  Value<String> json,
-  Value<DateTime> addedAt,
-  Value<int> rowid,
-});
+typedef $$FavoriteLinesTableCreateCompanionBuilder =
+    FavoriteLinesCompanion Function({
+      required String routeId,
+      required String json,
+      required DateTime addedAt,
+      Value<int> rowid,
+    });
+typedef $$FavoriteLinesTableUpdateCompanionBuilder =
+    FavoriteLinesCompanion Function({
+      Value<String> routeId,
+      Value<String> json,
+      Value<DateTime> addedAt,
+      Value<int> rowid,
+    });
 
-class $$FavoriteLinesTableFilterComposer extends Composer<_$AppDatabase, $FavoriteLinesTable> {
+class $$FavoriteLinesTableFilterComposer
+    extends Composer<_$AppDatabase, $FavoriteLinesTable> {
   $$FavoriteLinesTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -2796,17 +3157,24 @@ class $$FavoriteLinesTableFilterComposer extends Composer<_$AppDatabase, $Favori
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get routeId =>
-      $composableBuilder(column: $table.routeId, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get routeId => $composableBuilder(
+    column: $table.routeId,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get json =>
-      $composableBuilder(column: $table.json, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get addedAt =>
-      $composableBuilder(column: $table.addedAt, builder: (column) => ColumnFilters(column));
+  ColumnFilters<DateTime> get addedAt => $composableBuilder(
+    column: $table.addedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
-class $$FavoriteLinesTableOrderingComposer extends Composer<_$AppDatabase, $FavoriteLinesTable> {
+class $$FavoriteLinesTableOrderingComposer
+    extends Composer<_$AppDatabase, $FavoriteLinesTable> {
   $$FavoriteLinesTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -2814,17 +3182,24 @@ class $$FavoriteLinesTableOrderingComposer extends Composer<_$AppDatabase, $Favo
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get routeId =>
-      $composableBuilder(column: $table.routeId, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get routeId => $composableBuilder(
+    column: $table.routeId,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get json =>
-      $composableBuilder(column: $table.json, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get addedAt =>
-      $composableBuilder(column: $table.addedAt, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<DateTime> get addedAt => $composableBuilder(
+    column: $table.addedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
-class $$FavoriteLinesTableAnnotationComposer extends Composer<_$AppDatabase, $FavoriteLinesTable> {
+class $$FavoriteLinesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $FavoriteLinesTable> {
   $$FavoriteLinesTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -2853,7 +3228,10 @@ class $$FavoriteLinesTableTableManager
           $$FavoriteLinesTableAnnotationComposer,
           $$FavoriteLinesTableCreateCompanionBuilder,
           $$FavoriteLinesTableUpdateCompanionBuilder,
-          (FavoriteLineRow, BaseReferences<_$AppDatabase, $FavoriteLinesTable, FavoriteLineRow>),
+          (
+            FavoriteLineRow,
+            BaseReferences<_$AppDatabase, $FavoriteLinesTable, FavoriteLineRow>,
+          ),
           FavoriteLineRow,
           PrefetchHooks Function()
         > {
@@ -2862,7 +3240,8 @@ class $$FavoriteLinesTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () => $$FavoriteLinesTableFilterComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$FavoriteLinesTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
               $$FavoriteLinesTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
@@ -2895,7 +3274,11 @@ class $$FavoriteLinesTableTableManager
               .map(
                 (e) => (
                   e.readTable<$FavoriteLinesTable, FavoriteLineRow>(table),
-                  BaseReferences<_$AppDatabase, $FavoriteLinesTable, FavoriteLineRow>(db, table, e),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $FavoriteLinesTable,
+                    FavoriteLineRow
+                  >(db, table, e),
                 ),
               )
               .toList(),
@@ -2914,24 +3297,30 @@ typedef $$FavoriteLinesTableProcessedTableManager =
       $$FavoriteLinesTableAnnotationComposer,
       $$FavoriteLinesTableCreateCompanionBuilder,
       $$FavoriteLinesTableUpdateCompanionBuilder,
-      (FavoriteLineRow, BaseReferences<_$AppDatabase, $FavoriteLinesTable, FavoriteLineRow>),
+      (
+        FavoriteLineRow,
+        BaseReferences<_$AppDatabase, $FavoriteLinesTable, FavoriteLineRow>,
+      ),
       FavoriteLineRow,
       PrefetchHooks Function()
     >;
-typedef $$RecentPlacesTableCreateCompanionBuilder = RecentPlacesCompanion Function({
-  required String placeId,
-  required String json,
-  required DateTime usedAt,
-  Value<int> rowid,
-});
-typedef $$RecentPlacesTableUpdateCompanionBuilder = RecentPlacesCompanion Function({
-  Value<String> placeId,
-  Value<String> json,
-  Value<DateTime> usedAt,
-  Value<int> rowid,
-});
+typedef $$RecentPlacesTableCreateCompanionBuilder =
+    RecentPlacesCompanion Function({
+      required String placeId,
+      required String json,
+      required DateTime usedAt,
+      Value<int> rowid,
+    });
+typedef $$RecentPlacesTableUpdateCompanionBuilder =
+    RecentPlacesCompanion Function({
+      Value<String> placeId,
+      Value<String> json,
+      Value<DateTime> usedAt,
+      Value<int> rowid,
+    });
 
-class $$RecentPlacesTableFilterComposer extends Composer<_$AppDatabase, $RecentPlacesTable> {
+class $$RecentPlacesTableFilterComposer
+    extends Composer<_$AppDatabase, $RecentPlacesTable> {
   $$RecentPlacesTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -2939,17 +3328,24 @@ class $$RecentPlacesTableFilterComposer extends Composer<_$AppDatabase, $RecentP
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get placeId =>
-      $composableBuilder(column: $table.placeId, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get placeId => $composableBuilder(
+    column: $table.placeId,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get json =>
-      $composableBuilder(column: $table.json, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get usedAt =>
-      $composableBuilder(column: $table.usedAt, builder: (column) => ColumnFilters(column));
+  ColumnFilters<DateTime> get usedAt => $composableBuilder(
+    column: $table.usedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
-class $$RecentPlacesTableOrderingComposer extends Composer<_$AppDatabase, $RecentPlacesTable> {
+class $$RecentPlacesTableOrderingComposer
+    extends Composer<_$AppDatabase, $RecentPlacesTable> {
   $$RecentPlacesTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -2957,17 +3353,24 @@ class $$RecentPlacesTableOrderingComposer extends Composer<_$AppDatabase, $Recen
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get placeId =>
-      $composableBuilder(column: $table.placeId, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get placeId => $composableBuilder(
+    column: $table.placeId,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get json =>
-      $composableBuilder(column: $table.json, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get usedAt =>
-      $composableBuilder(column: $table.usedAt, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<DateTime> get usedAt => $composableBuilder(
+    column: $table.usedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
-class $$RecentPlacesTableAnnotationComposer extends Composer<_$AppDatabase, $RecentPlacesTable> {
+class $$RecentPlacesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $RecentPlacesTable> {
   $$RecentPlacesTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -2996,7 +3399,10 @@ class $$RecentPlacesTableTableManager
           $$RecentPlacesTableAnnotationComposer,
           $$RecentPlacesTableCreateCompanionBuilder,
           $$RecentPlacesTableUpdateCompanionBuilder,
-          (RecentPlaceRow, BaseReferences<_$AppDatabase, $RecentPlacesTable, RecentPlaceRow>),
+          (
+            RecentPlaceRow,
+            BaseReferences<_$AppDatabase, $RecentPlacesTable, RecentPlaceRow>,
+          ),
           RecentPlaceRow,
           PrefetchHooks Function()
         > {
@@ -3005,16 +3411,24 @@ class $$RecentPlacesTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () => $$RecentPlacesTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () => $$RecentPlacesTableOrderingComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$RecentPlacesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$RecentPlacesTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$RecentPlacesTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> placeId = const Value.absent(),
-            Value<String> json = const Value.absent(),
-            Value<DateTime> usedAt = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) => RecentPlacesCompanion(placeId: placeId, json: json, usedAt: usedAt, rowid: rowid),
+          updateCompanionCallback:
+              ({
+                Value<String> placeId = const Value.absent(),
+                Value<String> json = const Value.absent(),
+                Value<DateTime> usedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => RecentPlacesCompanion(
+                placeId: placeId,
+                json: json,
+                usedAt: usedAt,
+                rowid: rowid,
+              ),
           createCompanionCallback:
               ({
                 required String placeId,
@@ -3031,7 +3445,11 @@ class $$RecentPlacesTableTableManager
               .map(
                 (e) => (
                   e.readTable<$RecentPlacesTable, RecentPlaceRow>(table),
-                  BaseReferences<_$AppDatabase, $RecentPlacesTable, RecentPlaceRow>(db, table, e),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $RecentPlacesTable,
+                    RecentPlaceRow
+                  >(db, table, e),
                 ),
               )
               .toList(),
@@ -3050,26 +3468,32 @@ typedef $$RecentPlacesTableProcessedTableManager =
       $$RecentPlacesTableAnnotationComposer,
       $$RecentPlacesTableCreateCompanionBuilder,
       $$RecentPlacesTableUpdateCompanionBuilder,
-      (RecentPlaceRow, BaseReferences<_$AppDatabase, $RecentPlacesTable, RecentPlaceRow>),
+      (
+        RecentPlaceRow,
+        BaseReferences<_$AppDatabase, $RecentPlacesTable, RecentPlaceRow>,
+      ),
       RecentPlaceRow,
       PrefetchHooks Function()
     >;
-typedef $$CachedResponsesTableCreateCompanionBuilder = CachedResponsesCompanion Function({
-  required String key,
-  required String json,
-  required DateTime fetchedAt,
-  Value<DateTime?> expiresAt,
-  Value<int> rowid,
-});
-typedef $$CachedResponsesTableUpdateCompanionBuilder = CachedResponsesCompanion Function({
-  Value<String> key,
-  Value<String> json,
-  Value<DateTime> fetchedAt,
-  Value<DateTime?> expiresAt,
-  Value<int> rowid,
-});
+typedef $$CachedResponsesTableCreateCompanionBuilder =
+    CachedResponsesCompanion Function({
+      required String key,
+      required String json,
+      required DateTime fetchedAt,
+      Value<DateTime?> expiresAt,
+      Value<int> rowid,
+    });
+typedef $$CachedResponsesTableUpdateCompanionBuilder =
+    CachedResponsesCompanion Function({
+      Value<String> key,
+      Value<String> json,
+      Value<DateTime> fetchedAt,
+      Value<DateTime?> expiresAt,
+      Value<int> rowid,
+    });
 
-class $$CachedResponsesTableFilterComposer extends Composer<_$AppDatabase, $CachedResponsesTable> {
+class $$CachedResponsesTableFilterComposer
+    extends Composer<_$AppDatabase, $CachedResponsesTable> {
   $$CachedResponsesTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -3077,17 +3501,25 @@ class $$CachedResponsesTableFilterComposer extends Composer<_$AppDatabase, $Cach
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<String> get key =>
-      $composableBuilder(column: $table.key, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<String> get json =>
-      $composableBuilder(column: $table.json, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get fetchedAt =>
-      $composableBuilder(column: $table.fetchedAt, builder: (column) => ColumnFilters(column));
+  ColumnFilters<DateTime> get fetchedAt => $composableBuilder(
+    column: $table.fetchedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
-  ColumnFilters<DateTime> get expiresAt =>
-      $composableBuilder(column: $table.expiresAt, builder: (column) => ColumnFilters(column));
+  ColumnFilters<DateTime> get expiresAt => $composableBuilder(
+    column: $table.expiresAt,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
 class $$CachedResponsesTableOrderingComposer
@@ -3099,17 +3531,25 @@ class $$CachedResponsesTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<String> get key =>
-      $composableBuilder(column: $table.key, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<String> get json =>
-      $composableBuilder(column: $table.json, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get json => $composableBuilder(
+    column: $table.json,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get fetchedAt =>
-      $composableBuilder(column: $table.fetchedAt, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<DateTime> get fetchedAt => $composableBuilder(
+    column: $table.fetchedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
-  ColumnOrderings<DateTime> get expiresAt =>
-      $composableBuilder(column: $table.expiresAt, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<DateTime> get expiresAt => $composableBuilder(
+    column: $table.expiresAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$CachedResponsesTableAnnotationComposer
@@ -3147,13 +3587,19 @@ class $$CachedResponsesTableTableManager
           $$CachedResponsesTableUpdateCompanionBuilder,
           (
             CachedResponseRow,
-            BaseReferences<_$AppDatabase, $CachedResponsesTable, CachedResponseRow>,
+            BaseReferences<
+              _$AppDatabase,
+              $CachedResponsesTable,
+              CachedResponseRow
+            >,
           ),
           CachedResponseRow,
           PrefetchHooks Function()
         > {
-  $$CachedResponsesTableTableManager(_$AppDatabase db, $CachedResponsesTable table)
-    : super(
+  $$CachedResponsesTableTableManager(
+    _$AppDatabase db,
+    $CachedResponsesTable table,
+  ) : super(
         TableManagerState(
           db: db,
           table: table,
@@ -3195,11 +3641,11 @@ class $$CachedResponsesTableTableManager
               .map(
                 (e) => (
                   e.readTable<$CachedResponsesTable, CachedResponseRow>(table),
-                  BaseReferences<_$AppDatabase, $CachedResponsesTable, CachedResponseRow>(
-                    db,
-                    table,
-                    e,
-                  ),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $CachedResponsesTable,
+                    CachedResponseRow
+                  >(db, table, e),
                 ),
               )
               .toList(),
@@ -3218,7 +3664,10 @@ typedef $$CachedResponsesTableProcessedTableManager =
       $$CachedResponsesTableAnnotationComposer,
       $$CachedResponsesTableCreateCompanionBuilder,
       $$CachedResponsesTableUpdateCompanionBuilder,
-      (CachedResponseRow, BaseReferences<_$AppDatabase, $CachedResponsesTable, CachedResponseRow>),
+      (
+        CachedResponseRow,
+        BaseReferences<_$AppDatabase, $CachedResponsesTable, CachedResponseRow>,
+      ),
       CachedResponseRow,
       PrefetchHooks Function()
     >;
@@ -3230,7 +3679,8 @@ class $AppDatabaseManager {
       $$CatalogStopsTableTableManager(_db, _db.catalogStops);
   $$CatalogRoutesTableTableManager get catalogRoutes =>
       $$CatalogRoutesTableTableManager(_db, _db.catalogRoutes);
-  $$KeyValuesTableTableManager get keyValues => $$KeyValuesTableTableManager(_db, _db.keyValues);
+  $$KeyValuesTableTableManager get keyValues =>
+      $$KeyValuesTableTableManager(_db, _db.keyValues);
   $$FavoriteStopsTableTableManager get favoriteStops =>
       $$FavoriteStopsTableTableManager(_db, _db.favoriteStops);
   $$FavoriteLinesTableTableManager get favoriteLines =>

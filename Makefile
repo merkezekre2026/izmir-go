@@ -48,4 +48,6 @@ contracts:
 	$(BACKEND) uv run python -m izmirgo.api.export_openapi ../contracts/openapi.json
 
 mobile-check:
-	cd apps/mobile && dart format --set-exit-if-changed lib test && flutter analyze && flutter test
+	cd apps/mobile && dart format --output=none --set-exit-if-changed \
+		$$(git ls-files 'lib/*.dart' 'test/*.dart' | grep -vE '\.g\.dart$$|\.freezed\.dart$$|^lib/l10n/gen/') \
+		&& flutter analyze && flutter test
