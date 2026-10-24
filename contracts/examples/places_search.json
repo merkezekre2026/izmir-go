@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "id": "tram:FXT3",
+      "name": "Fixture Alsancak Gar",
+      "subtitle": "tram",
+      "lat": 38.439586,
+      "lon": 27.148271,
+      "kind": "stop",
+      "provider": "catalog"
+    }
+  ],
+  "attribution": null
+}

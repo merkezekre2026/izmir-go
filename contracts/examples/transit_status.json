@@ -1,0 +1,87 @@
+{
+  "dataset": {
+    "id": 1,
+    "label": "20261024T1700Z-0443592b",
+    "published_at": "2026-10-24T17:00:43.725788Z"
+  },
+  "sources": [
+    {
+      "source": "metro",
+      "operator": "İzmir Metro A.Ş.",
+      "mode": "metro",
+      "status": "included",
+      "reason": "producer feed",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-12-31",
+      "fetched_at": "2026-10-24T17:00:43.588331Z",
+      "last_attempt_at": "2026-10-24T17:00:43.588331Z",
+      "last_attempt_status": "valid",
+      "times_approximate": false,
+      "has_calendar_exceptions": true,
+      "live_data": false
+    },
+    {
+      "source": "tram",
+      "operator": "İzmir Metro A.Ş. (Tram İzmir)",
+      "mode": "tram",
+      "status": "included",
+      "reason": "producer feed",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-12-31",
+      "fetched_at": "2026-10-24T17:00:43.601203Z",
+      "last_attempt_at": "2026-10-24T17:00:43.601203Z",
+      "last_attempt_status": "valid",
+      "times_approximate": false,
+      "has_calendar_exceptions": false,
+      "live_data": false
+    },
+    {
+      "source": "eshot",
+      "operator": "ESHOT Genel Müdürlüğü",
+      "mode": "bus",
+      "status": "excluded",
+      "reason": "current feed expired",
+      "valid_from": null,
+      "valid_to": null,
+      "fetched_at": null,
+      "last_attempt_at": "2026-10-24T17:00:43.607378Z",
+      "last_attempt_status": "expired",
+      "times_approximate": true,
+      "has_calendar_exceptions": null,
+      "live_data": true
+    },
+    {
+      "source": "izban",
+      "operator": "İZBAN A.Ş.",
+      "mode": "rail",
+      "status": "excluded",
+      "reason": "no published dataset includes this source",
+      "valid_from": null,
+      "valid_to": null,
+      "fetched_at": null,
+      "last_attempt_at": null,
+      "last_attempt_status": null,
+      "times_approximate": false,
+      "has_calendar_exceptions": null,
+      "live_data": false
+    },
+    {
+      "source": "izdeniz",
+      "operator": "İzmir Deniz İşletmeciliği A.Ş. (İZDENİZ)",
+      "mode": "ferry",
+      "status": "excluded",
+      "reason": "no published dataset includes this source",
+      "valid_from": null,
+      "valid_to": null,
+      "fetched_at": null,
+      "last_attempt_at": null,
+      "last_attempt_status": null,
+      "times_approximate": false,
+      "has_calendar_exceptions": null,
+      "live_data": false
+    }
+  ],
+  "last_run_at": "2026-10-24T17:00:43.574283Z",
+  "last_run_status": "published",
+  "generated_at": "2026-10-24T17:00:43.851675Z"
+}

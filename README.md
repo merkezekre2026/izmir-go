@@ -56,7 +56,7 @@ Requirements: Flutter 3.47.x stable. iOS builds also need macOS with Xcode.
 cd apps/mobile
 flutter pub get
 dart run build_runner build --delete-conflicting-outputs
-flutter run --flavor dev --dart-define-from-file=config/dev.json
+flutter run --dart-define-from-file=config/dev.json
 ```
 
 ## Data attribution

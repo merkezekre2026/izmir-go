@@ -1,0 +1,379 @@
+{
+  "items": [
+    {
+      "id": "j_4dc1a68e9c431afd",
+      "start": "2026-10-28T08:00:00+03:00",
+      "end": "2026-10-28T08:20:00+03:00",
+      "duration_s": 1200,
+      "transfers": 1,
+      "walk_distance_m": 279,
+      "modes": [
+        "metro",
+        "walk",
+        "tram"
+      ],
+      "legs": [
+        {
+          "mode": "metro",
+          "start": "2026-10-28T08:00:00+03:00",
+          "end": "2026-10-28T08:02:30+03:00",
+          "duration_s": 150,
+          "distance_m": 1351,
+          "origin": {
+            "name": "Fixture Stadyum",
+            "lat": 38.4425,
+            "lon": 27.1808,
+            "stop_id": "metro:FXM1",
+            "station_id": null
+          },
+          "destination": {
+            "name": "Fixture Halkapınar Metro",
+            "lat": 38.435,
+            "lon": 27.1686,
+            "stop_id": "metro:FXM2",
+            "station_id": "stn:fx-halkapinar"
+          },
+          "route": {
+            "id": "metro:FX1",
+            "line_key": "metro:FX1",
+            "short_name": "FM1",
+            "long_name": "Fixture Stadyum – Fixture Hilal",
+            "mode": "metro",
+            "color": "0038EF",
+            "text_color": "FFFFFF",
+            "source": "metro",
+            "times_approximate": false
+          },
+          "trip_id": "metro:FXM_WD_0_013",
+          "headsign": "Fixture FXM3",
+          "service_date": "2026-10-28",
+          "intermediate_stops": [],
+          "geometry": [
+            [
+              27.1808,
+              38.4425
+            ],
+            [
+              27.1686,
+              38.435
+            ]
+          ],
+          "geometry_basis": "stop_to_stop",
+          "is_transfer": false,
+          "transfer_source": null,
+          "basis": "scheduled",
+          "times_approximate": false
+        },
+        {
+          "mode": "walk",
+          "start": "2026-10-28T08:02:30+03:00",
+          "end": "2026-10-28T08:05:57+03:00",
+          "duration_s": 207,
+          "distance_m": 279,
+          "origin": {
+            "name": "Fixture Halkapınar Metro",
+            "lat": 38.435,
+            "lon": 27.1686,
+            "stop_id": "metro:FXM2",
+            "station_id": "stn:fx-halkapinar"
+          },
+          "destination": {
+            "name": "Fixture Halkapınar Tram",
+            "lat": 38.433952,
+            "lon": 27.171507,
+            "stop_id": "tram:FXT1",
+            "station_id": "stn:fx-halkapinar"
+          },
+          "route": null,
+          "trip_id": null,
+          "headsign": null,
+          "service_date": null,
+          "intermediate_stops": [],
+          "geometry": [
+            [
+              27.1686,
+              38.435
+            ],
+            [
+              27.171507,
+              38.433952
+            ]
+          ],
+          "geometry_basis": "straight_line",
+          "is_transfer": true,
+          "transfer_source": "curated",
+          "basis": "scheduled",
+          "times_approximate": false
+        },
+        {
+          "mode": "tram",
+          "start": "2026-10-28T08:12:00+03:00",
+          "end": "2026-10-28T08:20:00+03:00",
+          "duration_s": 480,
+          "distance_m": 2197,
+          "origin": {
+            "name": "Fixture Halkapınar Tram",
+            "lat": 38.433952,
+            "lon": 27.171507,
+            "stop_id": "tram:FXT1",
+            "station_id": "stn:fx-halkapinar"
+          },
+          "destination": {
+            "name": "Fixture Alsancak Gar",
+            "lat": 38.439586,
+            "lon": 27.148271,
+            "stop_id": "tram:FXT3",
+            "station_id": null
+          },
+          "route": {
+            "id": "tram:FXK",
+            "line_key": "tram:FXK",
+            "short_name": null,
+            "long_name": "Fixture Konak Tramvayı",
+            "mode": "tram",
+            "color": "AD1457",
+            "text_color": "FFFFFF",
+            "source": "tram",
+            "times_approximate": false
+          },
+          "trip_id": "tram:FXT_ALL_0_012",
+          "headsign": "Fixture FXT3",
+          "service_date": "2026-10-28",
+          "intermediate_stops": [
+            {
+              "stop_id": "tram:FXT2",
+              "name": "Fixture Havagazı",
+              "lat": 38.439858,
+              "lon": 27.158134,
+              "scheduled_departure": "2026-10-28T08:16:00+03:00"
+            }
+          ],
+          "geometry": [
+            [
+              27.1715,
+              38.43395
+            ],
+            [
+              27.15813,
+              38.43985
+            ],
+            [
+              27.14827,
+              38.43958
+            ]
+          ],
+          "geometry_basis": "shape",
+          "is_transfer": false,
+          "transfer_source": null,
+          "basis": "scheduled",
+          "times_approximate": false
+        }
+      ],
+      "basis": "scheduled"
+    },
+    {
+      "id": "j_86c69036e5d747ce",
+      "start": "2026-10-28T08:10:00+03:00",
+      "end": "2026-10-28T08:32:00+03:00",
+      "duration_s": 1320,
+      "transfers": 1,
+      "walk_distance_m": 279,
+      "modes": [
+        "metro",
+        "walk",
+        "tram"
+      ],
+      "legs": [
+        {
+          "mode": "metro",
+          "start": "2026-10-28T08:10:00+03:00",
+          "end": "2026-10-28T08:12:30+03:00",
+          "duration_s": 150,
+          "distance_m": 1351,
+          "origin": {
+            "name": "Fixture Stadyum",
+            "lat": 38.4425,
+            "lon": 27.1808,
+            "stop_id": "metro:FXM1",
+            "station_id": null
+          },
+          "destination": {
+            "name": "Fixture Halkapınar Metro",
+            "lat": 38.435,
+            "lon": 27.1686,
+            "stop_id": "metro:FXM2",
+            "station_id": "stn:fx-halkapinar"
+          },
+          "route": {
+            "id": "metro:FX1",
+            "line_key": "metro:FX1",
+            "short_name": "FM1",
+            "long_name": "Fixture Stadyum – Fixture Hilal",
+            "mode": "metro",
+            "color": "0038EF",
+            "text_color": "FFFFFF",
+            "source": "metro",
+            "times_approximate": false
+          },
+          "trip_id": "metro:FXM_WD_0_014",
+          "headsign": "Fixture FXM3",
+          "service_date": "2026-10-28",
+          "intermediate_stops": [],
+          "geometry": [
+            [
+              27.1808,
+              38.4425
+            ],
+            [
+              27.1686,
+              38.435
+            ]
+          ],
+          "geometry_basis": "stop_to_stop",
+          "is_transfer": false,
+          "transfer_source": null,
+          "basis": "scheduled",
+          "times_approximate": false
+        },
+        {
+          "mode": "walk",
+          "start": "2026-10-28T08:12:30+03:00",
+          "end": "2026-10-28T08:15:57+03:00",
+          "duration_s": 207,
+          "distance_m": 279,
+          "origin": {
+            "name": "Fixture Halkapınar Metro",
+            "lat": 38.435,
+            "lon": 27.1686,
+            "stop_id": "metro:FXM2",
+            "station_id": "stn:fx-halkapinar"
+          },
+          "destination": {
+            "name": "Fixture Halkapınar Tram",
+            "lat": 38.433952,
+            "lon": 27.171507,
+            "stop_id": "tram:FXT1",
+            "station_id": "stn:fx-halkapinar"
+          },
+          "route": null,
+          "trip_id": null,
+          "headsign": null,
+          "service_date": null,
+          "intermediate_stops": [],
+          "geometry": [
+            [
+              27.1686,
+              38.435
+            ],
+            [
+              27.171507,
+              38.433952
+            ]
+          ],
+          "geometry_basis": "straight_line",
+          "is_transfer": true,
+          "transfer_source": "curated",
+          "basis": "scheduled",
+          "times_approximate": false
+        },
+        {
+          "mode": "tram",
+          "start": "2026-10-28T08:24:00+03:00",
+          "end": "2026-10-28T08:32:00+03:00",
+          "duration_s": 480,
+          "distance_m": 2197,
+          "origin": {
+            "name": "Fixture Halkapınar Tram",
+            "lat": 38.433952,
+            "lon": 27.171507,
+            "stop_id": "tram:FXT1",
+            "station_id": "stn:fx-halkapinar"
+          },
+          "destination": {
+            "name": "Fixture Alsancak Gar",
+            "lat": 38.439586,
+            "lon": 27.148271,
+            "stop_id": "tram:FXT3",
+            "station_id": null
+          },
+          "route": {
+            "id": "tram:FXK",
+            "line_key": "tram:FXK",
+            "short_name": null,
+            "long_name": "Fixture Konak Tramvayı",
+            "mode": "tram",
+            "color": "AD1457",
+            "text_color": "FFFFFF",
+            "source": "tram",
+            "times_approximate": false
+          },
+          "trip_id": "tram:FXT_ALL_0_013",
+          "headsign": "Fixture FXT3",
+          "service_date": "2026-10-28",
+          "intermediate_stops": [
+            {
+              "stop_id": "tram:FXT2",
+              "name": "Fixture Havagazı",
+              "lat": 38.439858,
+              "lon": 27.158134,
+              "scheduled_departure": "2026-10-28T08:28:00+03:00"
+            }
+          ],
+          "geometry": [
+            [
+              27.1715,
+              38.43395
+            ],
+            [
+              27.15813,
+              38.43985
+            ],
+            [
+              27.14827,
+              38.43958
+            ]
+          ],
+          "geometry_basis": "shape",
+          "is_transfer": false,
+          "transfer_source": null,
+          "basis": "scheduled",
+          "times_approximate": false
+        }
+      ],
+      "basis": "scheduled"
+    }
+  ],
+  "routing_errors": [],
+  "meta": {
+    "dataset": {
+      "id": 1,
+      "label": "20261024T1700Z-0443592b",
+      "published_at": "2026-10-24T17:00:43.725788Z"
+    },
+    "generated_at": "2026-10-24T17:00:44.073057Z",
+    "sources": [
+      {
+        "source": "metro",
+        "valid_from": "2026-01-01",
+        "valid_to": "2027-12-31"
+      },
+      {
+        "source": "tram",
+        "valid_from": "2026-01-01",
+        "valid_to": "2027-12-31"
+      }
+    ],
+    "notices": [
+      {
+        "code": "SOURCE_EXCLUDED",
+        "message": "ESHOT otobüs tarifeleri dahil değil: tarife geçerlilik süresi dolmuş.",
+        "source": "eshot"
+      },
+      {
+        "code": "NO_HOLIDAY_CALENDAR",
+        "message": "Resmî tatillerde sefer saatleri farklı olabilir; operatörler tatil takvimi yayımlamıyor.",
+        "source": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "dataset": {
+    "id": 1,
+    "label": "20261024T1700Z-0443592b",
+    "published_at": "2026-10-24T17:00:43.725788Z"
+  },
+  "generated_at": "2026-10-24T17:00:44.026438Z",
+  "stops": [
+    {
+      "id": "eshot:50011",
+      "name": "Fixture Otobüs Durağı",
+      "lat": 38.4341,
+      "lon": 27.1713,
+      "modes": [
+        "bus"
+      ],
+      "kind": "stop",
+      "parent_station": null,
+      "has_schedule": false,
+      "lines": [
+        "32"
+      ]
+    },
+    {
+      "id": "metro:FXM1",
+      "name": "Fixture Stadyum",
+      "lat": 38.4425,
+      "lon": 27.1808,
+      "modes": [
+        "metro"
+      ],
+      "kind": "stop",
+      "parent_station": null,
+      "has_schedule": true,
+      "lines": []
+    },
+    {
+      "id": "metro:FXM2",
+      "name": "Fixture Halkapınar Metro",
+      "lat": 38.435,
+      "lon": 27.1686,
+      "modes": [
+        "metro"
+      ],
+      "kind": "stop",
+      "parent_station": "stn:fx-halkapinar",
+      "has_schedule": true,
+      "lines": []
+    },
+    {
+      "id": "metro:FXM3",
+      "name": "Fixture Hilal",
+      "lat": 38.4275,
+      "lon": 27.1564,
+      "modes": [
+        "metro"
+      ],
+      "kind": "stop",
+      "parent_station": null,
+      "has_schedule": true,
+      "lines": []
+    },
+    {
+      "id": "stn:fx-halkapinar",
+      "name": "Fixture Halkapınar Aktarma",
+      "lat": 38.434476,
+      "lon": 27.170054,
+      "modes": [
+        "metro",
+        "tram"
+      ],
+      "kind": "station",
+      "parent_station": null,
+      "has_schedule": true,
+      "lines": []
+    },
+    {
+      "id": "tram:FXT1",
+      "name": "Fixture Halkapınar Tram",
+      "lat": 38.433952,
+      "lon": 27.171507,
+      "modes": [
+        "tram"
+      ],
+      "kind": "stop",
+      "parent_station": "stn:fx-halkapinar",
+      "has_schedule": true,
+      "lines": []
+    },
+    {
+      "id": "tram:FXT2",
+      "name": "Fixture Havagazı",
+      "lat": 38.439858,
+      "lon": 27.158134,
+      "modes": [
+        "tram"
+      ],
+      "kind": "stop",
+      "parent_station": null,
+      "has_schedule": true,
+      "lines": []
+    },
+    {
+      "id": "tram:FXT3",
+      "name": "Fixture Alsancak Gar",
+      "lat": 38.439586,
+      "lon": 27.148271,
+      "modes": [
+        "tram"
+      ],
+      "kind": "stop",
+      "parent_station": null,
+      "has_schedule": true,
+      "lines": []
+    }
+  ],
+  "routes": [
+    {
+      "id": "metro:FX1",
+      "line_key": "metro:FX1",
+      "short_name": "FM1",
+      "long_name": "Fixture Stadyum – Fixture Hilal",
+      "mode": "metro",
+      "color": "0038EF",
+      "text_color": "FFFFFF",
+      "source": "metro",
+      "times_approximate": false
+    },
+    {
+      "id": "tram:FXK",
+      "line_key": "tram:FXK",
+      "short_name": null,
+      "long_name": "Fixture Konak Tramvayı",
+      "mode": "tram",
+      "color": "AD1457",
+      "text_color": "FFFFFF",
+      "source": "tram",
+      "times_approximate": false
+    }
+  ],
+  "sources": [
+    {
+      "source": "metro",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-12-31"
+    },
+    {
+      "source": "tram",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-12-31"
+    }
+  ]
+}

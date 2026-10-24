@@ -1,0 +1,108 @@
+{
+  "stop": {
+    "id": "stn:fx-halkapinar",
+    "name": "Fixture Halkapınar Aktarma",
+    "code": null,
+    "lat": 38.434476,
+    "lon": 27.170054,
+    "modes": [
+      "metro",
+      "tram"
+    ],
+    "kind": "station",
+    "parent_station": null,
+    "source": "stn",
+    "has_schedule": true,
+    "lines": [],
+    "children": [
+      {
+        "id": "metro:FXM2",
+        "name": "Fixture Halkapınar Metro",
+        "code": null,
+        "lat": 38.435,
+        "lon": 27.1686,
+        "modes": [
+          "metro"
+        ],
+        "kind": "stop",
+        "parent_station": "stn:fx-halkapinar",
+        "source": "metro",
+        "has_schedule": true,
+        "lines": []
+      },
+      {
+        "id": "tram:FXT1",
+        "name": "Fixture Halkapınar Tram",
+        "code": null,
+        "lat": 38.433952,
+        "lon": 27.171507,
+        "modes": [
+          "tram"
+        ],
+        "kind": "stop",
+        "parent_station": "stn:fx-halkapinar",
+        "source": "tram",
+        "has_schedule": true,
+        "lines": []
+      }
+    ],
+    "routes": [
+      {
+        "id": "metro:FX1",
+        "line_key": "metro:FX1",
+        "short_name": "FM1",
+        "long_name": "Fixture Stadyum – Fixture Hilal",
+        "mode": "metro",
+        "color": "0038EF",
+        "text_color": "FFFFFF",
+        "source": "metro",
+        "times_approximate": false
+      },
+      {
+        "id": "tram:FXK",
+        "line_key": "tram:FXK",
+        "short_name": null,
+        "long_name": "Fixture Konak Tramvayı",
+        "mode": "tram",
+        "color": "AD1457",
+        "text_color": "FFFFFF",
+        "source": "tram",
+        "times_approximate": false
+      }
+    ],
+    "wheelchair_boarding": null,
+    "live_supported": false
+  },
+  "meta": {
+    "dataset": {
+      "id": 1,
+      "label": "20261024T1700Z-0443592b",
+      "published_at": "2026-10-24T17:00:43.725788Z"
+    },
+    "generated_at": "2026-10-24T17:00:43.904808Z",
+    "sources": [
+      {
+        "source": "metro",
+        "valid_from": "2026-01-01",
+        "valid_to": "2027-12-31"
+      },
+      {
+        "source": "tram",
+        "valid_from": "2026-01-01",
+        "valid_to": "2027-12-31"
+      }
+    ],
+    "notices": [
+      {
+        "code": "SOURCE_EXCLUDED",
+        "message": "ESHOT otobüs tarifeleri dahil değil: tarife geçerlilik süresi dolmuş.",
+        "source": "eshot"
+      },
+      {
+        "code": "NO_HOLIDAY_CALENDAR",
+        "message": "Resmî tatillerde sefer saatleri farklı olabilir; operatörler tatil takvimi yayımlamıyor.",
+        "source": null
+      }
+    ]
+  }
+}

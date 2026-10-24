@@ -1,0 +1,5 @@
+{
+  "FLAVOR": "staging",
+  "API_BASE_URL": "https://staging.example.invalid/api/v1",
+  "MAP_STYLE_URL": "https://tiles.openfreemap.org/styles/liberty"
+}
