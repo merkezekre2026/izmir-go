@@ -1,0 +1,80 @@
+[project]
+name = "izmirgo"
+version = "0.1.0"
+description = "İzmir Go backend: transit API and GTFS ingestion pipeline"
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+license = "MIT"
+dependencies = [
+    "fastapi>=0.162,<0.163",
+    "uvicorn[standard]>=0.54,<0.55",
+    "pydantic>=2.14,<3",
+    "pydantic-settings>=2.11,<3",
+    "sqlalchemy>=2.1,<2.2",
+    "alembic>=1.20,<2",
+    "geoalchemy2>=0.20,<0.21",
+    "psycopg[binary]>=3.3,<4",
+    "httpx>=0.28,<0.29",
+    "structlog>=26.1",
+    "prometheus-client>=0.23",
+    "pyyaml>=6.0.2",
+    "typer>=0.20",
+]
+
+[project.scripts]
+izmirgo-ingest = "izmirgo.ingestion.cli:app"
+izmirgo-api = "izmirgo.api.app:run"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1",
+    "pytest-asyncio>=1.2",
+    "respx>=0.22",
+    "ruff>=0.14",
+    "mypy>=1.18",
+    "types-pyyaml",
+    "testcontainers[postgres]>=4.15",
+]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/izmirgo"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "N", "S", "C4", "SIM", "RUF", "PTH", "DTZ", "ASYNC"]
+ignore = ["S101"]  # asserts are fine in tests; production code uses explicit errors
+# Turkish text legitimately uses dotless/dotted i.
+allowed-confusables = ["ı", "İ"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S", "PLR2004"]
+"migrations/**" = ["N999"]
+
+[tool.mypy]
+strict = true
+python_version = "3.13"
+plugins = ["pydantic.mypy"]
+mypy_path = "src"
+packages = ["izmirgo"]
+
+[[tool.mypy.overrides]]
+module = ["geoalchemy2.*", "testcontainers.*", "respx.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "db: needs a PostGIS database (testcontainers or IZMIRGO_TEST_DATABASE_URL)",
+    "otp: needs Docker to build and run OpenTripPlanner",
+    "network: hits real upstream services (never run in PR CI)",
+]
+addopts = "-m 'not network and not otp' --strict-markers"

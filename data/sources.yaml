@@ -1,0 +1,91 @@
+# İzmir Go upstream source registry.
+# Every URL here was checked on 2026-10-24 (see docs/data-sources.md for findings).
+# `kind: gtfs` sources are candidates for the merged routing feed.
+# `kind: api` sources are queried at request time by backend provider adapters.
+
+attribution:
+  izmir_open_data:
+    text_tr: "Atıf 4.0 Uluslararası (CC BY 4.0) kapsamında lisanslanan kamu sektörü bilgilerini içerir."
+    licence: CC-BY-4.0
+    licence_url: https://acikveri.bizizmir.com/tr/license
+    portal: https://acikveri.bizizmir.com
+  openstreetmap:
+    text: "© OpenStreetMap contributors"
+    licence: ODbL-1.0
+    licence_url: https://www.openstreetmap.org/copyright
+
+gtfs:
+  - id: metro
+    operator: "İzmir Metro A.Ş."
+    mode: metro
+    url: https://www.izmirmetro.com.tr/gtfs/rail-metro-gtfs.zip
+    mirrors:
+      - https://files.mobilitydatabase.org/mdb-1824/latest.zip
+    licence: CC-BY-4.0
+    status_2026_10_24: valid   # calendar 2026-07-09 .. 2027-07-09
+    route_grouping: by_short_name   # M1 is published as two direction routes
+
+  - id: tram
+    operator: "İzmir Metro A.Ş. (Tram İzmir)"
+    mode: tram
+    url: https://www.tramizmir.com/gtfs/rail-tramizmir-gtfs.zip
+    mirrors:
+      - https://files.mobilitydatabase.org/mdb-1829/latest.zip
+    licence: CC-BY-4.0
+    status_2026_10_24: valid   # calendar 2026-07-16 .. 2027-07-16
+    route_grouping: by_route_id
+
+  - id: eshot
+    operator: "ESHOT Genel Müdürlüğü"
+    mode: bus
+    url: https://www.eshot.gov.tr/gtfs/bus-eshot-gtfs.zip
+    mirrors:
+      # Lags behind the producer; use only while its calendar is still valid.
+      - https://files.mobilitydatabase.org/mdb-1823/latest.zip
+    licence: CC-BY-4.0
+    status_2026_10_24: producer_unreachable_from_sandbox  # mirror copy valid 2026-08-05..2026-10-05
+    route_grouping: by_short_name   # route_id != public line number for ~137 routes
+    times_approximate: true         # every stop_time has timepoint=0
+
+  - id: izban
+    operator: "İZBAN A.Ş."
+    mode: rail
+    url: https://www.izban.com.tr/gtfs/rail-izban-gtfs.zip
+    mirrors:
+      - https://files.mobilitydatabase.org/mdb-1828/latest.zip
+    licence: CC-BY-4.0
+    status_2026_10_24: expired      # calendar ended 2025-01-01; file last modified 2023-03-21
+    route_grouping: by_route_id
+
+  - id: izdeniz
+    operator: "İzmir Deniz İşletmeciliği A.Ş. (İZDENİZ)"
+    mode: ferry
+    url: https://www.izdeniz.com.tr/gtfs/ship-izdeniz-gtfs.zip
+    mirrors: []
+    licence: CC-BY-4.0
+    status_2026_10_24: broken       # URL returns an HTML page, not a ZIP
+    route_grouping: by_route_id
+
+static_csv:
+  eshot_announcements:
+    url: https://openfiles.izmir.bel.tr/211488/docs/eshot-otobus-hat-duyurulari.csv
+    delimiter: ";"
+    cadence: twice_daily
+  eshot_stops:
+    url: https://openfiles.izmir.bel.tr/211488/docs/eshot-otobus-duraklari.csv
+    delimiter: ";"
+    cadence: twice_daily
+
+api:
+  base_url: https://openapi.izmir.bel.tr/api
+  auth: anonymous   # official PDFs: "Servise anonim olarak erişilebilir."
+  endpoints:
+    eshot_approaching_buses: /iztek/duragayaklasanotobusler/{durakId}
+    eshot_line_approaching_buses: /iztek/hattinyaklasanotobusleri/{hatNo}/{durakId}
+    eshot_line_vehicle_positions: /iztek/hatotobuskonumlari/{hatNo}
+    izban_stations: /izban/istasyonlar
+    izban_departures: /izban/sefersaatleri/{kalkisIstasyonId}/{varisIstasyonId}
+    izdeniz_piers: /izdeniz/iskeleler
+    izdeniz_days: /izdeniz/gunler
+    izdeniz_od_timetable: /izdeniz/vapursaatleri/{kalkis}/{varis}/{gunId}/0
+    izdeniz_pier_departures: /izdeniz/iskelesefersaatleri/{iskeleId}/{gunId}

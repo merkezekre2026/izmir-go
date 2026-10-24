@@ -1,0 +1,40 @@
+# Local development stack. Production overrides live in compose.prod.yaml.
+name: izmirgo
+
+services:
+  db:
+    image: postgis/postgis:17-3.6
+    environment:
+      POSTGRES_USER: izmirgo
+      POSTGRES_PASSWORD: izmirgo   # local dev only
+      POSTGRES_DB: izmirgo
+    ports: ["5432:5432"]
+    volumes: [db-data:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U izmirgo -d izmirgo"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: ../../backend
+    environment:
+      IZMIRGO_DATABASE_URL: postgresql+psycopg://izmirgo:izmirgo@db:5432/izmirgo
+      IZMIRGO_OTP_URL: http://otp:8080
+      IZMIRGO_LOG_FORMAT: json
+    ports: ["8000:8000"]
+    depends_on:
+      db: { condition: service_healthy }
+    profiles: [api]
+
+  otp:
+    image: opentripplanner/opentripplanner:2.10.0
+    command: ["--load", "--serve"]
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xmx4g"
+    volumes: ["../../var/otp/active:/var/opentripplanner"]
+    ports: ["8080:8080"]
+    profiles: [otp]
+
+volumes:
+  db-data:
