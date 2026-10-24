@@ -20,7 +20,7 @@
 | Load fixtures | `make seed-fixtures` |
 | Run API | `make api` |
 | Regenerate contract | `make contracts` (CI fails if `contracts/openapi.json` drifts) |
-| Mobile checks | `cd apps/mobile && dart format --set-exit-if-changed . && flutter analyze && flutter test` |
+| Mobile checks | `make mobile-check` (never run `dart format` on `*.g.dart` / `*.freezed.dart`: CI compares them with fresh build_runner output) |
 
 ## Layout
 - `backend/src/izmirgo/core`: config, logging, HTTP (timeouts/retry/circuit breaker), cache, service-day time maths.
